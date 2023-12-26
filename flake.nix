@@ -24,12 +24,12 @@
 
             home-manager.users.decio = import ./home-decio.nix;
 
-	    home-manager.extraSpecialArgs = {
-		  pkgs-22_11 = import nixpkgs-22_11 {
-		    system = system;
-		    config.allowUnfree = true;
-                  };
-	    };
+            home-manager.extraSpecialArgs = {
+              pkgs-22_11 = import nixpkgs-22_11 {
+                system = system;
+                config.allowUnfree = true;
+              };
+            };
           }
         ];
       };

@@ -43,32 +43,46 @@
     LC_TIME = "pt_PT.UTF-8";
   };
 
-  # Configure keymap in X11
+  services = {
+    gnome.gnome-keyring.enable = true;
+    upower.enable = true;
+
+    dbus = {
+      enable = true;
+    };
+  };
+
   services.xserver = {
     enable = true;
+
     layout = "us";
     xkbVariant = "";
     xkbOptions = "caps:swapescape";
+
+    libinput = {
+      enable = true;
+      touchpad.disableWhileTyping = true;
+    };
 
     desktopManager = {
       xterm.enable = false;
     };
 
     displayManager = {
-      defaultSession = "none+i3";
+      defaultSession = "none+xmonad";
       lightdm.enable = true;
     };
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-	i3status
-	i3lock
-	i3blocks
-      ];
-    };
+    windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
   };
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  systemd.services.upower.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.decio = {

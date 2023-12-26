@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-22_11, ... }:
+{ lib, config, pkgs, pkgs-22_11, ... }:
 
 {
 	home = {
@@ -34,6 +34,11 @@
 		stateVersion = "23.11";
 	};
 
+	imports = [
+		./xmonad
+		./rofi
+	];
+
 	programs = {
 		home-manager.enable = true;
 
@@ -68,7 +73,7 @@
 				bbenoist.nix
 				hashicorp.terraform
 				yzhang.markdown-all-in-one
-             		];
+			];
 		};
 	};
 }
