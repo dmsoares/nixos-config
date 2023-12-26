@@ -29,6 +29,7 @@
                 system = system;
                 config.allowUnfree = true;
               };
+              hidpi = false;
             };
           }
         ];

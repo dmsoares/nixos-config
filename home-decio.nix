@@ -1,9 +1,16 @@
 { lib, config, pkgs, pkgs-22_11, ... }:
 
+let
+	username = "decio";
+	homeDirectory = "/home/${username}";
+	configHome = "${homeDirectory}/.config";
+
+in
+
 {
 	home = {
-		username = "decio";
-		homeDirectory = "/home/decio";
+		inherit username homeDirectory;
+
 		packages = with pkgs; [
 		      	discord
 		      	google-chrome
@@ -26,17 +33,23 @@
 		];
 
 		sessionVariables = {
-		      	BROWSER = "google-chrome-stable";
-		      	EDITOR = "nvim";
+		    BROWSER = "google-chrome-stable";
+		    EDITOR = "nvim";
 			TERMINAL = "alacritty";
 		};
 
 		stateVersion = "23.11";
 	};
 
+	xdg = {
+		enable = true;
+		inherit configHome;
+	};
+
 	imports = [
 		./xmonad
 		./rofi
+		./polybar
 	];
 
 	programs = {
@@ -65,9 +78,9 @@
 		vscode = {
 			enable = true;
 			extensions = with pkgs.vscode-extensions; [
-			    	esbenp.prettier-vscode
-			    	dbaeumer.vscode-eslint
-			    	bradlc.vscode-tailwindcss
+			    esbenp.prettier-vscode
+			    dbaeumer.vscode-eslint
+			    bradlc.vscode-tailwindcss
 				ms-vscode.cpptools
 				github.copilot
 				bbenoist.nix

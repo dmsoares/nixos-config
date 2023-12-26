@@ -7,6 +7,10 @@
             enable = true;
             enableContribAndExtras = true;
 
+        extraPackages = hp: [
+            hp.dbus
+            hp.monad-logger
+        ];
             config = ./config.hs;
         };
     };
