@@ -19,23 +19,23 @@ let
   # openGithub = "${lib.getExe pkgs.firefox-beta-bin} -new-tab https\\://github.com/notifications";
 
   mypolybar = pkgs.polybar.override {
-    alsaSupport   = true;
+    alsaSupport = true;
     # githubSupport = true;
-    mpdSupport    = true;
-    pulseSupport  = true;
+    mpdSupport = true;
+    pulseSupport = true;
   };
 
   # theme adapted from: https://github.com/adi1090x/polybar-themes#-polybar-5
-  bars   = lib.readFile ./bars.ini;
+  bars = lib.readFile ./bars.ini;
   colors = lib.readFile ./colors.ini;
-  mods1  = lib.readFile ./modules.ini;
-  mods2  = lib.readFile ./user_modules.ini;
+  mods1 = lib.readFile ./modules.ini;
+  mods2 = lib.readFile ./user_modules.ini;
 
-  bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix {};
-  klsScript       = pkgs.callPackage ../scripts/keyboard-layout-switch.nix { inherit pkgs; };
-  monitorScript   = pkgs.callPackage ./scripts/monitor.nix {};
-  mprisScript     = pkgs.callPackage ./scripts/mpris.nix {};
-  networkScript   = pkgs.callPackage ./scripts/network.nix {};
+  bluetoothScript = pkgs.callPackage ./scripts/bluetooth.nix { };
+  klsScript = pkgs.callPackage ../../scripts/keyboard-layout-switch.nix { inherit pkgs; };
+  monitorScript = pkgs.callPackage ./scripts/monitor.nix { };
+  mprisScript = pkgs.callPackage ./scripts/mpris.nix { };
+  networkScript = pkgs.callPackage ./scripts/network.nix { };
 
   bctl = ''
     [module/bctl]
@@ -92,9 +92,9 @@ let
 in
 {
   home.packages = with pkgs; [
-    font-awesome          # awesome fonts
+    font-awesome # awesome fonts
     material-design-icons # fonts with glyphs
-    xfce.orage            # lightweight calendar
+    xfce.orage # lightweight calendar
   ];
 
   services.polybar = {

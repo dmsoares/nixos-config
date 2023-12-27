@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -75,9 +76,9 @@
     };
 
     windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
+      enable = true;
+      enableContribAndExtras = true;
+    };
   };
 
   hardware.bluetooth.enable = true;
@@ -89,15 +90,15 @@
   users.users.decio = {
     isNormalUser = true;
     description = "Decio Soares";
-    extraGroups = [ "networkmanager" "wheel" "docker"];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # Enable Flakes and the new command-line tool
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -127,10 +128,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
@@ -145,8 +146,8 @@
 
 
   # Limit the number of generations to keep
-  boot.loader.systemd-boot.configurationLimit = 10;
-  # boot.loader.grub.configurationLimit = 10;
+  # boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.grub.configurationLimit = 10;
 
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
