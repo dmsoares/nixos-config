@@ -22,6 +22,9 @@ in
       ripgrep
 
       # dev
+      pkgs-unstable.emacs
+
+      # programming languages
       nodejs
       nodePackages.npm
       pkgs-22_11.nodePackages.pnpm #pnpm v7
