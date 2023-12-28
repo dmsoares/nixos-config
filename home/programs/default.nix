@@ -8,14 +8,6 @@ let
         nix-direnv.enable = true;
       };
 
-      fzf = {
-        enable = true;
-        enableFishIntegration = false; # broken
-        defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
-        defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
-        fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
-      };
-
       gpg.enable = true;
 
       htop = {
@@ -33,6 +25,7 @@ let
   };
 in
 [
+  ./alacritty
   ./rofi
   ./xmonad
   ./zsh
