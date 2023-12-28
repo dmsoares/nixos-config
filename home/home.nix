@@ -29,7 +29,7 @@ in
       nodePackages.npm
       pkgs-22_11.nodePackages.pnpm #pnpm v7
 
-      libgcc
+      gcc
 
       cabal2nix
       nix-prefetch-git

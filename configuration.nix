@@ -64,6 +64,11 @@
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
+      touchpad.naturalScrolling = true;
+      touchpad.tapping = true;
+      touchpad.tappingDragLock = false;
+      touchpad.middleEmulation = true;
+      touchpad.accelSpeed = "0.5";
     };
 
     desktopManager = {
