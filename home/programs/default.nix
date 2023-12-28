@@ -35,5 +35,7 @@ in
 [
   ./rofi
   ./xmonad
+  ./zsh
+  ./fzf
   more
 ]

@@ -14,7 +14,7 @@
     flake-utils.lib.eachDefaultSystem
       (system:
         let
-          config = {};
+          config = { };
 
           overlays = [
             # This is an overlay we apply on top of Nixpkgs with some of our
@@ -25,7 +25,7 @@
                 overrides = hfinal: hprev: {
                   # This is our local Haskell package.
                   example-haskell-nix-flake =
-                    hfinal.callCabal2nix "example-haskell-nix-flake" ./. {};
+                    hfinal.callCabal2nix "example-haskell-nix-flake" ./. { };
                 };
               };
 

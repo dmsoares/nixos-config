@@ -121,6 +121,16 @@
     alias vim='nvim'
   '';
 
+  # ZSH
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    meslo-lgs-nf
+  ];
+
   # Docker
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [ "decio" ];
