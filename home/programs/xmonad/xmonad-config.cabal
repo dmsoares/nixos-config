@@ -1,0 +1,32 @@
+cabal-version:      3.0
+name:               xmonad-config
+version:            0.1.0.0
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Decio Soares
+maintainer:         decio.msoares@gmail.com
+category:           Example
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+
+    hs-source-dirs:   .
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+
+    build-depends:  
+        base,
+        dbus,
+        utf8-string,
+        xmonad,
+        xmonad-contrib,
+        xmonad-extras
+
+    -- Base language which the package is written in.
+    default-language: GHC2021

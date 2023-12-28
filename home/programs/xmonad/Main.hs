@@ -1,8 +1,11 @@
+module Main where
+
 import XMonad
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
-
+import XMonad.Hooks.EwmhDesktops                       ( ewmh , ewmhFullscreen )
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.FadeInactive                       ( fadeInactiveLogHook )
 
 -- Imports for Polybar --
@@ -12,7 +15,7 @@ import qualified DBus.Client                           as D
 import           XMonad.Hooks.DynamicLog
 
 main :: IO ()
-main = xmonad $ def
+main = xmonad . docks . ewmh . ewmhFullscreen $ def
     { modMask = mod4Mask  -- Rebind Mod to the Super key
     , terminal = myTerminal
     }

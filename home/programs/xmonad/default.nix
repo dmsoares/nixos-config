@@ -11,7 +11,7 @@
         hp.dbus
         hp.monad-logger
       ];
-      config = ./config.hs;
+      config = ./Main.hs;
     };
   };
 }

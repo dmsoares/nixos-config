@@ -28,7 +28,12 @@ in
 
       libgcc
 
-      ghc
+      cabal2nix
+      nix-prefetch-git
+      cabal-install
+
+      # libs
+      alsa-lib
     ];
 
     sessionVariables = {
@@ -85,6 +90,11 @@ in
         hashicorp.terraform
         yzhang.markdown-all-in-one
       ];
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
   };
 }
