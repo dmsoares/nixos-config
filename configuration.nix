@@ -81,7 +81,16 @@
     };
   };
 
-  hardware.bluetooth.enable = true;
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
+  hardware.pulseaudio.enable = true;
   services.blueman.enable = true;
 
   systemd.services.upower.enable = true;
