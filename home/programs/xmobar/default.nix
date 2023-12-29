@@ -4,6 +4,6 @@
   programs.xmobar = {
     enable = true;
 
-    extraConfig = builtins.readFile ./xmobarrc;
+    package = pkgs.haskellPackages.xmobar-app;
   };
 }

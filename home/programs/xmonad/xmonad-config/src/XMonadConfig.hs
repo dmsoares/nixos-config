@@ -20,7 +20,7 @@ import XMonad.Util.Run (spawnPipe)
 
 main :: IO ()
 main = do
-  let runXmobar screen = "xmobar -x " <> screen <> " $XDG_CONFIG_HOME/xmobar/.xmobarrc" 
+  let runXmobar screen = "xmobar-app -x " <> screen
   xmproc0 <- spawnPipe $ runXmobar "0"
   xmproc1 <- spawnPipe $ runXmobar "1"
   xmonad $

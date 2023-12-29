@@ -18,6 +18,9 @@
         modules = [
           ./configuration.nix
 
+
+          (args: { nixpkgs.overlays = import ./overlays args; })
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
