@@ -11,6 +11,6 @@ in
 [
   ./gpg-agent
   ./picom
-  ./polybar
+  ./trayer
   more
 ]

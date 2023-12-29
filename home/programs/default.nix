@@ -26,9 +26,10 @@ let
 in
 [
   ./alacritty
+  ./fzf
   ./rofi
+  ./xmobar
   ./xmonad
   ./zsh
-  ./fzf
   more
 ]

@@ -143,7 +143,7 @@
   # Fonts
   fonts.packages = with pkgs; [
     meslo-lgs-nf
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly"]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly" ]; })
   ];
 
   # Docker

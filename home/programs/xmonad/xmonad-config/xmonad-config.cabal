@@ -9,24 +9,24 @@ category:           Example
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
 
-common warnings
+common base
     ghc-options: -Wall
-
-library
-    import:           warnings
-
-    hs-source-dirs:   .
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
+    hs-source-dirs:   src
+    default-language: GHC2021
 
     build-depends:  
         base,
-        dbus,
-        utf8-string,
+        containers,
+        parsec,
+        process,
         xmonad,
         xmonad-contrib,
         xmonad-extras
 
-    -- Base language which the package is written in.
-    default-language: GHC2021
+library
+    import: base
+
+executable xmonad
+  import: base
+
+  main-is: XmonadConfig.hs
