@@ -45,6 +45,7 @@
                 nativeBuildInputs = [
                   final.cabal-install
                   final.haskellPackages.haskell-language-server
+                  final.haskellPackages.fourmolu
                   final.pango
                 ];
               };
