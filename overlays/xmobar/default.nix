@@ -6,7 +6,7 @@ with final.lib; let
       self: super:
         let
           xmobar-app = buildFromSdist (
-            overrideCabal (self.callPackage ../../home/programs/xmobar-app { })
+            overrideCabal (self.callPackage ../../home/programs/xmobar/xmobar-mrcjkb { })
               (old: {
                 configureFlags =
                   (old.configureFlags or [ ])

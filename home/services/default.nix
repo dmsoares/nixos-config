@@ -11,5 +11,6 @@ in
 [
   ./gpg-agent
   ./picom
+  ./trayer
   more
 ]

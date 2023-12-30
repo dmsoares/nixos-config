@@ -20,8 +20,7 @@ import XMonad.Util.Run (spawnPipe)
 
 main :: IO ()
 main = do
-  let runXmobar screen = "xmobar-app -x " <> screen
-  xmproc0 <- spawnPipe $ runXmobar "0"
+  let runXmobar screen = "xmobar -x " <> screen
   xmproc1 <- spawnPipe $ runXmobar "1"
   xmonad $
     ewmh
@@ -38,16 +37,16 @@ main = do
           logHook =
             dynamicLogWithPP
               xmobarPP
-                { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x,
-                  ppCurrent = xmobarColor myppCurrent "" . wrap "[" "]", -- Current workspace in xmobar
+                { ppOutput = hPutStrLn xmproc1,
+                  ppCurrent = xmobarColor myppCurrent "", -- Current workspace in xmobar
                   ppVisible = xmobarColor myppVisible "", -- Visible but not current workspace
-                  ppHidden = xmobarColor myppHidden "" . wrap "+" "", -- Hidden workspaces in xmobar
+                  ppHidden = xmobarColor myppHidden "", -- Hidden workspaces in xmobar
                   ppHiddenNoWindows = xmobarColor myppHiddenNoWindows "", -- Hidden workspaces (no windows)
                   ppTitle = xmobarColor myppTitle "" . shorten 80, -- Title of active window in xmobar
                   ppSep = "<fc=#586E75> | </fc>", -- Separators in xmobar
                   ppUrgent = xmobarColor myppUrgent "" . wrap "!" "!", -- Urgent workspace
                   ppExtras = [windowCount], -- # of windows current workspace
-                  ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
+                  ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex 
                 }
               >> updatePointer (0.25, 0.25) (0.25, 0.25)
         }
