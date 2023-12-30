@@ -1,3 +1,4 @@
+args@{ pkgs-unstable, ... }:
 let
   more = { pkgs, ... }: {
     programs = {
@@ -27,7 +28,9 @@ in
 [
   ./alacritty
   ./fzf
+  ./git
   ./rofi
+  (import ./vscode args)
   ./xmobar
   ./xmonad
   ./zsh

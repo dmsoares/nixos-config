@@ -1,4 +1,4 @@
-{ lib, config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
+args@{ lib, config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
 
 let
   username = "decio";
@@ -14,28 +14,29 @@ in
     packages = with pkgs; [
       discord
       google-chrome
-
-      # utils
-      fd
-      fzf
-      jq
-      ripgrep
-
-      # dev
       pkgs-unstable.emacs
 
-      # programming languages
-      nodejs
-      nodePackages.npm
-      pkgs-22_11.nodePackages.pnpm #pnpm v7
-
+      # c/c++
       gcc
 
+      # haskell
       cabal2nix
       nix-prefetch-git
       cabal-install
 
-      # libs
+      # js
+      nodejs
+      nodePackages.npm
+      pkgs-22_11.nodePackages.pnpm #pnpm v7
+
+      awscli2
+      terraform
+
+      # misc
+      fd
+      fzf
+      jq
+      ripgrep
       alsa-lib
     ];
 
@@ -53,37 +54,12 @@ in
     inherit configHome;
   };
 
-  imports = lib.concatMap import [
+  imports = lib.concatMap (x: import x args) [
     ./services
     ./programs
   ];
 
   programs = {
     home-manager.enable = true;
-
-    git = {
-      enable = true;
-      userName = "Decio Soares";
-      userEmail = "decio.msoares@gmail.com";
-    };
-
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        esbenp.prettier-vscode
-        dbaeumer.vscode-eslint
-        bradlc.vscode-tailwindcss
-        ms-vscode.cpptools
-        github.copilot
-        bbenoist.nix
-        hashicorp.terraform
-        yzhang.markdown-all-in-one
-      ];
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
   };
 }
