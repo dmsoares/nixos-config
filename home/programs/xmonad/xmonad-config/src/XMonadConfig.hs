@@ -120,12 +120,14 @@ myKeys =
          ("M-S-q", killAll),
          ("M-<Tab>", sendMessage NextLayout),
          ("M-<Space>", sendMessage (MT.Toggle NBFULL)),
-         ("<XF86MonBrightnessUp>", spawn "brightnessctl -d intel_backlight set +300"),
-         ("<XF86MonBrightnessDown>", spawn "brightnessctl -d intel_backlight set 300-"),
+         ("<XF86MonBrightnessUp>", spawn "brightnessctl set 5%+"),
+         ("<XF86MonBrightnessDown>", spawn "brightnessctl set 5%-"),
          ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute"),
          ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute"),
          ("<XF86AudioMute>", spawn "amixer sset Master toggle"),
-         ("<XF86AudioMicMute>", spawn "amixer sset Capture toggle")
+         ("S-<XF86AudioLowerVolume>", spawn "amixer set Capture 5%- unmute"),
+         ("S-<XF86AudioRaiseVolume>", spawn "amixer set Capture 5%+ unmute"),
+         ("S-<XF86AudioMute>", spawn "amixer sset Capture toggle")
        ]
 
 myLayoutHook =

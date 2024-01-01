@@ -26,9 +26,11 @@ Config { font            = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:h
                                "-l", "red"
                              ] 360
                            , Run Date "%b %d %Y - %H:%M " "date" 50
+                           , Run Alsa "default" "Master" []
+                           , Run Alsa "default" "Capture" []
                            , Run UnsafeStdinReader
                            ]
        , sepChar         = "%"
        , alignSep        = "}{"
-       , template        = " <fc=#fb4934>%baticon%   %battery%</fc>     <fc=#b8bb26><action=`alacritty -e htop`>%cpu%</action></fc>     <fc=#458588><action=`alacritty -e htop`>%memory%</action></fc>     <fc=#d79921>%disku%</fc>     <fc=#b16286>%dynnetwork%</fc>}<fc=#b16286>λ</fc> %UnsafeStdinReader% {%date%"
+       , template        = " <fc=#fb4934>%baticon%   %battery%</fc>     <fc=#b8bb26><action=`alacritty -e htop`>%cpu%</action></fc>     <fc=#458588><action=`alacritty -e htop`>%memory%</action></fc>     <fc=#d79921>%disku%</fc>     <fc=#b16286>%dynnetwork%</fc>}<fc=#b16286>λ</fc> %UnsafeStdinReader% {%alsa:default:Capture% %alsa:default:Master% %date%"
        }

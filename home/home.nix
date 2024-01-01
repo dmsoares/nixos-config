@@ -31,6 +31,7 @@ in
 
       awscli2
       terraform
+      kubectl
 
       # misc
       fd

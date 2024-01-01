@@ -12,10 +12,10 @@
       widthtype = "request";
       height = 22;
       distancefrom = "right";
-      distance = 180;
+      distance = 430;
       transparent = true;
       alpha = 0;
-      tint = "0x28282800";
+      tint = "0x282828";
     };
   };
 }

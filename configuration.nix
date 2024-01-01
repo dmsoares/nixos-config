@@ -122,6 +122,7 @@
     git
     neovim
     wget
+    brightnessctl
   ];
 
   # Set default editor to neovim
