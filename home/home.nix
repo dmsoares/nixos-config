@@ -8,11 +8,18 @@ let
 in
 
 {
+
+  imports = lib.concatMap (x: import x args) [
+    ./services
+    ./programs
+  ];
+
   home = {
     inherit username homeDirectory;
 
     packages = with pkgs; [
       discord
+      spotify
       google-chrome
       pkgs-unstable.emacs
 
@@ -55,12 +62,8 @@ in
     inherit configHome;
   };
 
-  imports = lib.concatMap (x: import x args) [
-    ./services
-    ./programs
-  ];
-
   programs = {
     home-manager.enable = true;
   };
+
 }

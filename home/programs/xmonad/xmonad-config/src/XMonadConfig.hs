@@ -32,6 +32,7 @@ main = do
   xmonad . ewmh $
     desktopConfig
       { manageHook = manageDocks <+> manageHook desktopConfig,
+        startupHook = myStartupHook,
         layoutHook = myLayoutHook,
         handleEventHook = handleEventHook desktopConfig,
         workspaces = myWorkspaces,
@@ -138,6 +139,10 @@ myKeys =
          ("S-<XF86AudioRaiseVolume>", spawn "amixer set Capture 5%+ unmute"),
          ("S-<XF86AudioMute>", spawn "amixer sset Capture toggle")
        ]
+
+myStartupHook :: X ()
+myStartupHook = do
+  spawn "feh --bg-fill --no-fehbg ~/.fehbg"
 
 myLayoutHook =
   smartBorders

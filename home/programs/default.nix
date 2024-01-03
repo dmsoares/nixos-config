@@ -27,6 +27,7 @@ let
 in
 [
   ./alacritty
+  ./feh
   ./fzf
   ./git
   ./rofi
