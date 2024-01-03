@@ -1,3 +1,5 @@
+import Data.Map qualified as M
+import Data.Maybe (fromJust)
 import System.IO (hPutStrLn)
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow
@@ -13,7 +15,7 @@ import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.MultiToggle ((??))
 import XMonad.Layout.MultiToggle qualified as MT
 import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.NoBorders (withBorder)
+import XMonad.Layout.NoBorders (smartBorders, withBorder)
 import XMonad.Layout.Renamed (Rename (..), renamed)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
@@ -45,12 +47,12 @@ main = do
                 ppCurrent = xmobarColor myppCurrent "", -- Current workspace in xmobar
                 ppVisible = xmobarColor myppVisible "", -- Visible but not current workspace
                 ppHidden = xmobarColor myppHidden "", -- Hidden workspaces in xmobar
-                ppHiddenNoWindows = xmobarColor myppHiddenNoWindows "", -- Hidden workspaces (no windows)
+                ppHiddenNoWindows = xmobarColor myppHiddenNoWindows "" . clickable, -- Hidden workspaces (no windows)
                 ppTitle = xmobarColor myppTitle "" . shorten 80, -- Title of active window in xmobar
                 ppSep = "<fc=#586E75> | </fc>", -- Separators in xmobar
                 ppUrgent = xmobarColor myppUrgent "" . wrap "!" "!", -- Urgent workspace
                 ppExtras = [windowCount], -- # of windows current workspace
-                ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex
+                ppOrder = \(ws : l : _ : ex) -> [ws, l] ++ ex
               }
             >> updatePointer (0.25, 0.25) (0.25, 0.25)
       }
@@ -60,13 +62,13 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 
 myBorderWidth :: Dimension
-myBorderWidth = 0
+myBorderWidth = 5
 
 myNormalBorderColor :: String
-myNormalBorderColor = "#34495e"
+myNormalBorderColor = "#282828"
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#9d9d9d"
+myFocusedBorderColor = "#93a1a1"
 
 myppCurrent :: String
 myppCurrent = "#cb4b16"
@@ -87,7 +89,15 @@ myppUrgent :: String
 myppUrgent = "#DC322F"
 
 myWorkspaces :: [String]
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = show <$> [1 :: Int .. 9]
+
+-- myWSKeys = concat [[("M-" ++ n, windows $ W.greedyView n), ("M-S-" ++ n, windows $ W.shift n)] | n <- myWorkspaces]
+
+clickable :: [Char] -> [Char]
+clickable ws = "<action=xdotool key super+" ++ show (i :: Int) ++ ">" ++ ws ++ "</action>"
+  where
+    i = fromJust $ M.lookup ws myWorkspaceIndices
+    myWorkspaceIndices = M.fromList $ zip myWorkspaces [1 .. 9] -- (,) == \x y -> (x,y)
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -106,16 +116,15 @@ emojiPicker = "rofi -modi emoji -show emoji -emoji-mode copy"
 
 myKeys :: [(String, X ())]
 myKeys =
-  [ ("M-" ++ m ++ k, windows $ f i)
-    | (i, k) <- zip myWorkspaces (map show [1 :: Int ..]),
-      (f, m) <- [(W.view, ""), (W.shift, "S-"), (copy, "S-C-")]
-  ]
+  [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.view, ""), (W.shift, "S-"), (copy, "S-C-")]]
     ++ [ ("M-<Return>", spawn myTerminal),
+         ("M-S-m", windows W.swapMaster),
          ("M-b", spawn myBrowser),
          ("M-/", spawn appLauncher),
          ("M-S-/", spawn emojiPicker),
          ("M-u", spawn "emacsclient -c -a 'emacs'"),
          ("M-S-u", spawn "code"),
+         ("M-<Escape>", spawn "slock"),
          ("M-q", kill1),
          ("M-S-q", killAll),
          ("M-<Tab>", sendMessage NextLayout),
@@ -131,7 +140,8 @@ myKeys =
        ]
 
 myLayoutHook =
-  avoidStruts
+  smartBorders
+    . avoidStruts
     . mouseResize
     . windowArrange
     $ MT.mkToggle (NBFULL ?? NOBORDERS ?? MT.EOT) myDefaultLayout

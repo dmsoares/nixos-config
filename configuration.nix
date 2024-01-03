@@ -44,48 +44,6 @@
     LC_TIME = "pt_PT.UTF-8";
   };
 
-  services = {
-    gnome.gnome-keyring.enable = true;
-    upower.enable = true;
-
-    dbus = {
-      enable = true;
-      packages = [ pkgs.dconf ];
-    };
-  };
-
-  services.xserver = {
-    enable = true;
-
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "caps:swapescape";
-
-    libinput = {
-      enable = true;
-      touchpad.disableWhileTyping = true;
-      touchpad.naturalScrolling = true;
-      touchpad.tapping = true;
-      touchpad.tappingDragLock = false;
-      touchpad.middleEmulation = true;
-      touchpad.accelSpeed = "0.5";
-    };
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager = {
-      defaultSession = "none+xmonad";
-      lightdm.enable = true;
-    };
-
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-  };
-
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -117,12 +75,12 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     alacritty
+    brightnessctl
     curl
     firefox
     git
     neovim
     wget
-    brightnessctl
   ];
 
   # Set default editor to neovim
@@ -163,6 +121,58 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  services = {
+    gnome.gnome-keyring.enable = true;
+    upower.enable = true;
+    autorandr.enable = true;
+
+    dbus = {
+      enable = true;
+      packages = [ pkgs.dconf ];
+    };
+
+    xserver = {
+      enable = true;
+
+      layout = "us";
+      xkbVariant = "";
+      xkbOptions = "caps:swapescape";
+
+      libinput = {
+        enable = true;
+        touchpad.disableWhileTyping = true;
+        touchpad.naturalScrolling = true;
+        touchpad.tapping = true;
+        touchpad.tappingDragLock = false;
+        touchpad.middleEmulation = true;
+        touchpad.accelSpeed = "0.5";
+      };
+
+      desktopManager = {
+        xterm.enable = false;
+      };
+
+      displayManager = {
+        defaultSession = "none+xmonad";
+        gdm.enable = true;
+      };
+
+      windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
+
+      xautolock = {
+        enable = true;
+        time = 10;
+        locker = "/run/wrappers/bin/slock";
+        nowlocker = "/run/wrappers/bin/slock";
+      };
+    };
+  };
+
+  programs.slock.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
