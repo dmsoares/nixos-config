@@ -18,15 +18,15 @@
         modules = [
           ./configuration.nix
 
-
-          (args: { nixpkgs.overlays = import ./overlays args; })
+          # uncomment to apply overlays
+          # (args: { nixpkgs.overlays = import ./overlays args; })
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.decio = import ./home/home.nix;
+            home-manager.users.decio = import ./home;
 
             home-manager.extraSpecialArgs = {
               pkgs-unstable = import nixpkgs-unstable {
@@ -37,9 +37,6 @@
                 system = system;
                 config.allowUnfree = true;
               };
-              # here to appease gvolpe's config
-              # should be removed when I get more comfortable with NixOS
-              hidpi = false;
             };
           }
         ];
