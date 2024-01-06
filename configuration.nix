@@ -78,6 +78,7 @@
     brightnessctl
     curl
     firefox
+    gdb
     git
     neovim
     wget

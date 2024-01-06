@@ -143,6 +143,7 @@ myKeys =
 myStartupHook :: X ()
 myStartupHook = do
   spawn "feh --bg-fill --no-fehbg ~/.fehbg"
+  spawn "emacs --daemon"
 
 myLayoutHook =
   smartBorders
