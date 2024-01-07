@@ -121,6 +121,7 @@ myKeys =
     ++ [ ("M-<Return>", spawn myTerminal),
          ("M-S-m", windows W.swapMaster),
          ("M-b", spawn myBrowser),
+         ("M-f", spawn "thunar"),
          ("M-/", spawn appLauncher),
          ("M-S-/", spawn emojiPicker),
          ("M-u", spawn "emacsclient -c -a 'emacs'"),

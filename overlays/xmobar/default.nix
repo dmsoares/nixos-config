@@ -7,7 +7,7 @@ with final.lib; let
         let
           xmobar-app = buildFromSdist (
             # should point to the "nixified" xmobar source directory
-            overrideCabal (self.callPackage ../../home/programs/xmobar/xmobar-mrcjkb { }) 
+            overrideCabal (self.callPackage ../../home/programs/xmobar/xmobar-mrcjkb { })
               (old: {
                 configureFlags =
                   (old.configureFlags or [ ])

@@ -99,6 +99,16 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # Thunar
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  programs.xfconf.enable = true;
+
 
   # Fonts
   fonts.packages = with pkgs; [
@@ -127,6 +137,10 @@
     gnome.gnome-keyring.enable = true;
     upower.enable = true;
     autorandr.enable = true;
+
+    # Thunar
+    gvfs.enable = true; # Mount, trash, and other functionalities
+    tumbler.enable = true; # Thumbnail support for images
 
     dbus = {
       enable = true;
