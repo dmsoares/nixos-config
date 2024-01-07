@@ -10,6 +10,7 @@ let
   };
 in
 [
+  ./dunst
   ./gpg-agent
   ./picom
   ./trayer
