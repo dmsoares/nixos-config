@@ -4,6 +4,7 @@ import Data.Maybe (fromJust)
 import System.IO (hPutStrLn)
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow
+import XMonad.Actions.CycleWS (nextScreen, shiftNextScreen, toggleWS)
 import XMonad.Actions.MouseResize (mouseResize)
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.WithAll (killAll)
@@ -77,7 +78,7 @@ myppCurrent :: String
 myppCurrent = "#cb4b16"
 
 myppVisible :: String
-myppVisible = "#cb4b16"
+myppVisible = "#b16286"
 
 myppHidden :: String
 myppHidden = "#268bd2"
@@ -119,13 +120,16 @@ emojiPicker = "rofi -modi emoji -show emoji -emoji-mode copy"
 
 myKeys :: [(String, X ())]
 myKeys =
-  [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.view, ""), (W.shift, "S-"), (copy, "S-C-")]]
+  [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
     ++ [ ("M-<Return>", spawn myTerminal),
          ("M-S-m", windows W.swapMaster),
+         ("M-y", nextScreen),
+         ("M-S-y", shiftNextScreen),
+         ("M-o", toggleWS),
          ("M-b", spawn myBrowser),
          ("M-f", spawn "thunar"),
-         ("M-/", spawn appLauncher),
-         ("M-S-/", spawn emojiPicker),
+         ("M-p", spawn appLauncher),
+         ("M-S-p", spawn emojiPicker),
          ("M-u", spawn "emacsclient -c -a 'emacs'"),
          ("M-S-u", spawn "code"),
          ("M-<Escape>", spawn "slock"),
