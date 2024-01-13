@@ -41,11 +41,13 @@ in
       kubectl
 
       # misc
+      alsa-lib
       fd
       fzf
+      gh
       jq
+      peek
       ripgrep
-      alsa-lib
     ];
 
     sessionVariables = {

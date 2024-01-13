@@ -1,3 +1,4 @@
+import Data.Foldable (traverse_)
 import Data.Map qualified as M
 import Data.Maybe (fromJust)
 import System.IO (hPutStrLn)
@@ -26,38 +27,39 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Run (spawnPipe)
 
 main :: IO ()
-main = do
-  let runXmobar screen = "xmobar -x " <> screen
-  xmproc1 <- spawnPipe $ runXmobar "1"
-  xmonad . ewmh $
-    desktopConfig
-      { manageHook = manageDocks <+> manageHook desktopConfig,
-        startupHook = myStartupHook,
-        layoutHook = myLayoutHook,
-        handleEventHook = handleEventHook desktopConfig,
-        workspaces = myWorkspaces,
-        borderWidth = myBorderWidth,
-        terminal = myTerminal,
-        modMask = myModMask,
-        normalBorderColor = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-        logHook =
-          dynamicLogWithPP
-            xmobarPP
-              { ppOutput = hPutStrLn xmproc1,
-                ppCurrent = xmobarColor myppCurrent "", -- Current workspace in xmobar
-                ppVisible = xmobarColor myppVisible "", -- Visible but not current workspace
-                ppHidden = xmobarColor myppHidden "", -- Hidden workspaces in xmobar
-                ppHiddenNoWindows = xmobarColor myppHiddenNoWindows "" . clickable, -- Hidden workspaces (no windows)
-                ppTitle = xmobarColor myppTitle "" . shorten 80, -- Title of active window in xmobar
-                ppSep = "<fc=#586E75> | </fc>", -- Separators in xmobar
-                ppUrgent = xmobarColor myppUrgent "" . wrap "!" "!", -- Urgent workspace
-                ppExtras = [windowCount], -- # of windows current workspace
-                ppOrder = \(ws : l : _ : ex) -> [ws, l] ++ ex
-              }
-            >> updatePointer (0.25, 0.25) (0.25, 0.25)
-      }
-      `additionalKeysP` myKeys
+main =
+  let runXmobar screen = spawnPipe $ "xmobar -x " <> screen
+   in do
+        xmprocs <- traverse runXmobar ["1", "2"]
+        xmonad . ewmh $
+          desktopConfig
+            { manageHook = manageDocks <+> manageHook desktopConfig,
+              startupHook = myStartupHook,
+              layoutHook = myLayoutHook,
+              handleEventHook = handleEventHook desktopConfig,
+              workspaces = myWorkspaces,
+              borderWidth = myBorderWidth,
+              terminal = myTerminal,
+              modMask = myModMask,
+              normalBorderColor = myNormalBorderColor,
+              focusedBorderColor = myFocusedBorderColor,
+              logHook =
+                dynamicLogWithPP
+                  xmobarPP
+                    { ppOutput = \x -> traverse_ (`hPutStrLn` x) xmprocs,
+                      ppCurrent = xmobarColor myppCurrent "", -- Current workspace in xmobar
+                      ppVisible = xmobarColor myppVisible "", -- Visible but not current workspace
+                      ppHidden = xmobarColor myppHidden "", -- Hidden workspaces in xmobar
+                      ppHiddenNoWindows = xmobarColor myppHiddenNoWindows "" . clickable, -- Hidden workspaces (no windows)
+                      ppTitle = xmobarColor myppTitle "" . shorten 80, -- Title of active window in xmobar
+                      ppSep = "<fc=#586E75> | </fc>", -- Separators in xmobar
+                      ppUrgent = xmobarColor myppUrgent "" . wrap "!" "!", -- Urgent workspace
+                      ppExtras = [windowCount], -- # of windows current workspace
+                      ppOrder = \(ws : l : _ : ex) -> [ws, l] ++ ex
+                    }
+                  >> updatePointer (0.25, 0.25) (0.25, 0.25)
+            }
+            `additionalKeysP` myKeys
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -143,7 +145,7 @@ myKeys =
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "feh --bg-fill --no-fehbg ~/.fehbg"
+  spawn "feh --bg-fill --auto-zoom ~/.fehbg"
   spawn "emacs --daemon"
 
 myLayoutHook =

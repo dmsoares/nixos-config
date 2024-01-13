@@ -136,7 +136,7 @@
   services = {
     gnome.gnome-keyring.enable = true;
     upower.enable = true;
-    autorandr.enable = true;
+    # autorandr.enable = true;
 
     # Thunar
     gvfs.enable = true; # Mount, trash, and other functionalities

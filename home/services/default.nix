@@ -12,6 +12,7 @@ in
 [
   ./dunst
   ./gpg-agent
+  ./grobi
   ./picom
   ./trayer
   more
