@@ -19,6 +19,7 @@ in
 
     packages = with pkgs; [
       discord
+      telegram-desktop
       spotify
       google-chrome
       pkgs-unstable.emacs
