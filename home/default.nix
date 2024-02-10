@@ -38,7 +38,7 @@ in
       pkgs-22_11.nodePackages.pnpm #pnpm v7
 
       awscli2
-      terraform
+      pkgs-unstable.terraform
       kubectl
 
       # misc
