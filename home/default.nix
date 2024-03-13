@@ -22,21 +22,28 @@ in
       telegram-desktop
       spotify
       google-chrome
+      bruno
+      gscreenshot
       pkgs-unstable.emacs
+      pkgs-unstable.obsidian
 
       # c/c++
       gcc
 
       # haskell
-      cabal2nix
-      nix-prefetch-git
-      cabal-install
+      pkgs-unstable.cabal2nix
+      pkgs-unstable.nix-prefetch-git
+      pkgs-unstable.cabal-install
+      pkgs-unstable.ghc
+      pkgs-unstable.haskellPackages.haskell-language-server
+      pkgs-unstable.haskellPackages.fourmolu
 
       # js
       nodejs
       nodePackages.npm
       pkgs-22_11.nodePackages.pnpm #pnpm v7
 
+      # infra
       awscli2
       pkgs-unstable.terraform
       kubectl

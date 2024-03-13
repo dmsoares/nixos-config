@@ -36,6 +36,7 @@
               pkgs-unstable = import nixpkgs-unstable {
                 system = system;
                 config.allowUnfree = true;
+                config.permittedInsecurePackages = [ "electron-25.9.0" ];
               };
               pkgs-22_11 = import nixpkgs-22_11 {
                 system = system;

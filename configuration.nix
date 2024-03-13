@@ -17,6 +17,9 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "nixos"; # Define your hostname.
+
+  # networking.nameservers = [ "8.8.8.8" "8.8.4.4" ];
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -58,7 +61,7 @@
 
   systemd.services.upower.enable = true;
 
-  users.groups.plugdev = {};
+  users.groups.plugdev = { };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.decio = {
@@ -84,6 +87,10 @@
     git
     neovim
     wget
+
+    # libs
+    lzlib
+    zlib
   ];
 
   # Set default editor to neovim
@@ -155,6 +162,8 @@
       layout = "us";
       xkbVariant = "";
       xkbOptions = "caps:swapescape";
+
+      autoRepeatDelay = 150;
 
       libinput = {
         enable = true;
