@@ -18,12 +18,14 @@ in
     inherit username homeDirectory;
 
     packages = with pkgs; [
+      anki-bin
       discord
+      gimp
+      google-chrome
+      gscreenshot
+      insomnia
       telegram-desktop
       spotify
-      google-chrome
-      bruno
-      gscreenshot
       pkgs-unstable.emacs
       pkgs-unstable.obsidian
 

@@ -103,7 +103,7 @@ scratchpads =
   , NS "todo" "emacsclient -c -a 'emacs' -F '((name . \"emacs-todo\"))' ~/Documents/todo.md" (title =? "emacs-todo") defaultFloating
   ]
 
-clickable :: [Char] -> [Char]
+clickable :: String -> String
 clickable ws = "<action=xdotool key super+" ++ show (i :: Int) ++ ">" ++ ws ++ "</action>"
  where
   i = fromJust $ M.lookup ws myWorkspaceIndices

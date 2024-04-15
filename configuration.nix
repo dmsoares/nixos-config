@@ -18,6 +18,12 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  # Hosts file
+  # networking.extraHosts =
+  #   ''
+  #     127.0.0.2 other-localhost
+  #   '';
+
   # networking.nameservers = [ "8.8.8.8" "8.8.4.4" ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -87,10 +93,8 @@
     git
     neovim
     wget
-
-    # libs
-    lzlib
-    zlib
+    zip
+    unzip
   ];
 
   # Set default editor to neovim
@@ -146,6 +150,7 @@
     gnome.gnome-keyring.enable = true;
     upower.enable = true;
     autorandr.enable = true;
+    tlp.enable = true;
 
     # Thunar
     gvfs.enable = true; # Mount, trash, and other functionalities
@@ -191,7 +196,7 @@
 
       xautolock = {
         enable = true;
-        time = 10;
+        time = 15;
         locker = "/run/wrappers/bin/slock";
         nowlocker = "/run/wrappers/bin/slock";
       };
