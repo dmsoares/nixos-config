@@ -91,6 +91,7 @@
     firefox
     gdb
     git
+    gzip
     neovim
     wget
     zip

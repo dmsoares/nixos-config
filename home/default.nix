@@ -24,10 +24,12 @@ in
       google-chrome
       gscreenshot
       insomnia
+      mate.atril
       telegram-desktop
       spotify
       pkgs-unstable.emacs
       pkgs-unstable.obsidian
+      vlc
 
       # c/c++
       gcc
