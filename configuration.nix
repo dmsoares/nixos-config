@@ -169,7 +169,8 @@
       xkbVariant = "";
       xkbOptions = "caps:swapescape";
 
-      autoRepeatDelay = 150;
+      autoRepeatDelay = 125;
+      autoRepeatInterval = 20;
 
       libinput = {
         enable = true;
