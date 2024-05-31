@@ -232,6 +232,24 @@
     '';
   };
 
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "mydatabase" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database DBuser origin-address auth-method
+      local all      all                   trust
+      # ipv4
+      host  all      all    127.0.0.1/32   trust
+      # ipv6
+      host  all      all    ::1/128        trust
+    '';
+    initialScript = pkgs.writeText "backend-initScript" ''
+      CREATE ROLE decio WITH LOGIN CREATEDB;
+      GRANT ALL PRIVILEGES ON DATABASE mydatabase TO decio;
+      ALTER DATABASE mydatabase OWNER TO decio;
+    '';
+  };
+
   programs.slock.enable = true;
 
   # Open ports in the firewall.
