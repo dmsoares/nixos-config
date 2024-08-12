@@ -127,8 +127,10 @@
   # Fonts
   fonts.packages = with pkgs; [
     meslo-lgs-nf
+    monaspace
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly" ]; })
   ];
+  fonts.fontDir.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;

@@ -23,6 +23,7 @@ in
       gimp
       google-chrome
       gscreenshot
+      kazam
       insomnia
       mate.atril
       telegram-desktop
@@ -51,6 +52,7 @@ in
       awscli2
       pkgs-unstable.terraform
       kubectl
+      ssm-session-manager-plugin # aws ssm plugin
 
       # misc
       alsa-lib
@@ -58,8 +60,16 @@ in
       fzf
       gh
       jq
+      gnumake
       peek
       ripgrep
+
+      # postgres
+      jetbrains.datagrip
+      postgresql
+    
+      # python
+      python3
     ];
 
     sessionVariables = {
