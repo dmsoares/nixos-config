@@ -168,29 +168,18 @@
     xserver = {
       enable = true;
 
-      layout = "us";
-      xkbVariant = "";
-      xkbOptions = "caps:swapescape";
+      xkb.layout = "us";
+      xkb.variant = "";
+      xkb.options = "caps:swapescape";
 
       autoRepeatDelay = 125;
       autoRepeatInterval = 20;
-
-      libinput = {
-        enable = true;
-        touchpad.disableWhileTyping = true;
-        touchpad.naturalScrolling = true;
-        touchpad.tapping = true;
-        touchpad.tappingDragLock = false;
-        touchpad.middleEmulation = true;
-        touchpad.accelSpeed = "0.5";
-      };
 
       desktopManager = {
         xterm.enable = false;
       };
 
       displayManager = {
-        defaultSession = "none+xmonad";
         gdm.enable = true;
       };
 
@@ -205,6 +194,20 @@
         locker = "/run/wrappers/bin/slock";
         nowlocker = "/run/wrappers/bin/slock";
       };
+    };
+
+    displayManager = {
+      defaultSession = "none+xmonad";
+    };
+
+    libinput = {
+      enable = true;
+      touchpad.disableWhileTyping = true;
+      touchpad.naturalScrolling = true;
+      touchpad.tapping = true;
+      touchpad.tappingDragLock = false;
+      touchpad.middleEmulation = true;
+      touchpad.accelSpeed = "0.5";
     };
 
     udev.extraRules = ''
