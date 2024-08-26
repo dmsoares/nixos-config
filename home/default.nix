@@ -66,7 +66,6 @@ in
 
       # postgres
       jetbrains.datagrip
-      postgresql
     
       # python
       python3

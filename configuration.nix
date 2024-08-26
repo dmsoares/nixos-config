@@ -240,6 +240,7 @@
 
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_13;
     ensureDatabases = [ "mydatabase" ];
     authentication = pkgs.lib.mkOverride 10 ''
       #type database DBuser origin-address auth-method
