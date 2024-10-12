@@ -36,8 +36,8 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  # time.timeZone = "Europe/Lisbon";
-  time.timeZone = "Europe/Madrid";
+  time.timeZone = "Europe/Lisbon";
+  # time.timeZone = "Europe/Madrid";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -108,6 +108,7 @@
   # Aliases
   environment.interactiveShellInit = ''
     alias vim='nvim'
+    alias suspend='systemctl suspend'
   '';
 
   # ZSH

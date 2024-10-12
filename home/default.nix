@@ -31,6 +31,11 @@ in
       pkgs-unstable.emacs
       pkgs-unstable.obsidian
       vlc
+      pkgs-unstable.zed-editor
+
+      # agda
+      agda
+      agdaPackages.standard-library
 
       # c/c++
       gcc
@@ -43,6 +48,9 @@ in
       pkgs-unstable.haskellPackages.haskell-language-server
       pkgs-unstable.haskellPackages.fourmolu
 
+      # java
+      jdk
+
       # js
       nodejs
       nodePackages.npm
@@ -53,6 +61,9 @@ in
       pkgs-unstable.terraform
       kubectl
       ssm-session-manager-plugin # aws ssm plugin
+      
+      # lean4
+      elan
 
       # misc
       alsa-lib
