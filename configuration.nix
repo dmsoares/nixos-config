@@ -74,7 +74,7 @@
   users.users.decio = {
     isNormalUser = true;
     description = "Decio Soares";
-    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" "adbusers" ];
     packages = with pkgs; [ ];
   };
 
@@ -145,6 +145,16 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # android dev
+  programs.adb.enable = true;
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    android-tools
+  ];
 
   # List services that you want to enable:
 
@@ -261,7 +271,7 @@
   programs.slock.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 8000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -275,7 +285,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 1w";
+    options = "--delete-older-than 7d";
   };
 
   # Optimize storage

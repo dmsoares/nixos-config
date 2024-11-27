@@ -31,11 +31,15 @@ in
       pkgs-unstable.emacs
       pkgs-unstable.obsidian
       vlc
+      watchman
       pkgs-unstable.zed-editor
 
       # agda
       agda
       agdaPackages.standard-library
+
+      # android
+      pkgs-unstable.android-studio
 
       # c/c++
       gcc
@@ -50,10 +54,12 @@ in
 
       # java
       jdk
+      pkgs-unstable.gradle
 
       # js
       nodejs
       nodePackages.npm
+      pkgs-unstable.nodePackages.eas-cli
       pkgs-22_11.nodePackages.pnpm #pnpm v7
 
       # infra

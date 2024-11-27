@@ -1,6 +1,5 @@
 import Data.Foldable (traverse_)
 import Data.Map qualified as M
-import Data.Maybe (fromJust)
 import System.IO (hPutStrLn)
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow
@@ -62,7 +61,7 @@ main =
                     }
                   >> updatePointer (0.25, 0.25) (0.25, 0.25)
             }
-          `additionalKeysP` myKeys
+            `additionalKeysP` myKeys
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -104,9 +103,10 @@ scratchpads =
   ]
 
 clickable :: String -> String
-clickable ws = "<action=xdotool key super+" ++ show (i :: Int) ++ ">" ++ ws ++ "</action>"
+clickable ws = case M.lookup ws myWorkspaceIndices of
+  Just i -> "<action=xdotool key super+" ++ show (i :: Int) ++ ">" ++ ws ++ "</action>"
+  _ -> ws
  where
-  i = fromJust $ M.lookup ws myWorkspaceIndices
   myWorkspaceIndices = M.fromList $ zip myWorkspaces [1 .. 9]
 
 windowCount :: X (Maybe String)
@@ -137,6 +137,7 @@ myKeys =
        , ("M-b", spawn myBrowser)
        , ("M-f", spawn "thunar")
        , ("M-p", spawn appLauncher)
+       , ("M-S-r", spawn "xrandr --output HDMI-1 --off && xrandr --output HDMI-1 --auto &&  xrandr --output HDMI-1 --above eDP-1")
        , ("M-S-p", spawn emojiPicker)
        , ("M-u", spawn "emacsclient -c -a 'emacs'")
        , ("M-S-u", spawn "code")
