@@ -11,8 +11,11 @@ extra-doc-files:    CHANGELOG.md
 
 common base
     ghc-options: -Wall
-    hs-source-dirs:   src
     default-language: GHC2021
+
+executable xmonad
+    import: base
+    hs-source-dirs:   src
 
     build-depends:  
         base,
@@ -22,11 +25,3 @@ common base
         xmonad,
         xmonad-contrib,
         xmonad-extras
-
-library
-    import: base
-
-executable xmonad
-  import: base
-
-  main-is: XmonadConfig.hs

@@ -18,7 +18,6 @@ in
     inherit username homeDirectory;
 
     packages = with pkgs; [
-      anki-bin
       discord
       gimp
       google-chrome
@@ -34,12 +33,11 @@ in
       watchman
       pkgs-unstable.zed-editor
 
-      # agda
-      agda
-      agdaPackages.standard-library
-
-      # android
-      pkgs-unstable.android-studio
+      # beam
+      erlang_26
+      elixir
+      gleam
+      rebar3
 
       # c/c++
       gcc
@@ -52,13 +50,10 @@ in
       pkgs-unstable.haskellPackages.haskell-language-server
       pkgs-unstable.haskellPackages.fourmolu
 
-      # java
-      jdk
-      pkgs-unstable.gradle
-
       # js
       nodejs
       nodePackages.npm
+      pkgs-unstable.deno
       pkgs-unstable.nodePackages.eas-cli
       pkgs-22_11.nodePackages.pnpm #pnpm v7
 
@@ -67,9 +62,6 @@ in
       pkgs-unstable.terraform
       kubectl
       ssm-session-manager-plugin # aws ssm plugin
-      
-      # lean4
-      elan
 
       # misc
       alsa-lib
@@ -78,8 +70,12 @@ in
       gh
       jq
       gnumake
+      inotify-tools
+      libnotify
       peek
       ripgrep
+      xorg.xwininfo
+      xclip
 
       # postgres
       jetbrains.datagrip

@@ -1,8 +1,5 @@
-Config { font            = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true"
-       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
-                           , "xft:Font Awesome 6 Free Solid:pixelsize=12"
-                           , "xft:Font Awesome 6 Brands:pixelsize=12"
-                           ]
+Config { font            = "DejaVu Sans Mono 10"
+       , additionalFonts = [ "Font Awesome 9" ]
        , bgColor         = "#282828"
        , fgColor         = "#ebdbb2"
        , position        = TopSize L 100 24
@@ -11,26 +8,30 @@ Config { font            = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:h
        , allDesktops     = True
        , persistent      = True
        , iconRoot        = ".xmonad/xpm/"  -- default: "."
-       , commands        = [ Run Com ".local/bin/kernel" [] "kernel" 36000
-                           , Run Cpu ["-t", "<fn=2>\xf108</fn>  (<total>%)","-H","50","--high","red"] 20
-                           , Run Memory ["-t", "<fn=2>\xf233</fn>  <used>M (<usedratio>%)"] 20
-                           , Run DiskU [("/", "<fn=2>\xf0c7</fn>  <free>")] [] 60
-                           , Run DynNetwork [ "-t", "<fn=2>\xf0ab</fn>  <rx>KB <fn=2>\xf0aa</fn>  <tx>KB" ] 10
-                           , Run Com "echo" ["<fn=2>\xf242</fn>"] "baticon" 3600
-                           , Run Battery [
-                               "-t", "<acstatus>: <left>% (<timeleft>)",
-                               "--",
-                               "-O", "AC",
-                               "-o", "Bat",
-                               "-h", "green",
-                               "-l", "red"
-                             ] 360
+       , commands        = [ Run Cpu ["-t", "<action=`alacritty -e htop`><fc=#b8bb26><fn=1>\xf2db</fn></fc> <total>%</action>","-H","50","--high","red"] 20
+                           , Run Memory ["-t", "<action=`alacritty -e htop`><fc=#458588><fn=1>\xf233</fn></fc> <used>M (<usedratio>%)</action>"] 20
+                           , Run DiskU [("/", "<fc=#d79921><fn=1>\xf0c7</fn></fc> <free>")] [] 60
+                           , Run DynNetwork [ "-t", "<fc=#b16286><fn=1>\xf0ab</fn></fc> <rx>KB <fc=#b16286><fn=1>\xf0aa</fn></fc> <tx>KB" ] 10
+                           , Run BatteryN ["BAT0"]
+                               ["-t", "<acstatus>"
+                               , "-S", "Off", "-d", "0", "-m", "3"
+                               , "-L", "10", "-H", "90", "-p", "3"
+                               , "-W", "0"
+                               , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+                               , "--"
+                               , "-P"
+                               , "-a", "notify-send -u critical 'Battery running out!!!!!!'"
+                               , "-A", "5"
+                               , "-i", "<fn=1>\xf1e6</fn>"
+                               , "-O", "<fn=1><leftbar>  \xf1e6</fn>  <timeleft>"
+                               , "-o", "<fn=1><leftbar></fn>  <timeleft>"
+                               , "-H", "10", "-L", "7"
+                               ] 50 "batt0"
                            , Run Date "%b %d %Y - %H:%M " "date" 50
-                           , Run Alsa "default" "Master" []
-                           , Run Alsa "default" "Capture" []
+                           , Run Com "wpctl" ["get-volume", "@DEFAULT_AUDIO_SINK@"] "vol" 10
                            , Run UnsafeStdinReader
                            ]
        , sepChar         = "%"
        , alignSep        = "}{"
-       , template        = " <fc=#fb4934>%baticon%   %battery%</fc>     <fc=#b8bb26><action=`alacritty -e htop`>%cpu%</action></fc>     <fc=#458588><action=`alacritty -e htop`>%memory%</action></fc>     <fc=#d79921>%disku%</fc>     <fc=#b16286>%dynnetwork%</fc>}<fc=#b16286>λ</fc> %UnsafeStdinReader% {%alsa:default:Capture% %alsa:default:Master% %date%"
+       , template        = " %batt0%  %cpu%  %memory%  %disku%  %dynnetwork%}<fc=#b16286>λ</fc> %UnsafeStdinReader%{%vol% | %date%"
        }

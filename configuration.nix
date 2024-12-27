@@ -19,9 +19,10 @@
   networking.hostName = "nixos"; # Define your hostname.
 
   # Hosts file
+  environment.etc.hosts.mode = "0644";
   # networking.extraHosts =
   #   ''
-  #     127.0.0.2 other-localhost
+  #     127.0.0.1 ctt.dev.codeforall.io
   #   '';
 
   # networking.nameservers = [ "8.8.8.8" "8.8.4.4" ];
@@ -63,7 +64,7 @@
       };
     };
   };
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
   services.blueman.enable = true;
 
   systemd.services.upower.enable = true;
@@ -180,7 +181,7 @@
       enable = true;
 
       xkb.layout = "us";
-      xkb.variant = "";
+      xkb.variant = "altgr-intl";
       xkb.options = "caps:swapescape";
 
       autoRepeatDelay = 125;

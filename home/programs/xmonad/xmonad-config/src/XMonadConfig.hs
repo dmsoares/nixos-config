@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 import Data.Foldable (traverse_)
 import Data.Map qualified as M
 import System.IO (hPutStrLn)
@@ -57,11 +59,13 @@ main =
                     , ppSep = "<fc=#586E75> | </fc>" -- Separators in xmobar
                     , ppUrgent = xmobarColor myppUrgent "" . wrap "!" "!" -- Urgent workspace
                     , ppExtras = [windowCount] -- # of windows current workspace
-                    , ppOrder = \(ws : l : _ : ex) -> [ws, l] ++ ex
+                    , ppOrder = \case
+                        (ws : l : _ : ex) -> [ws, l] ++ ex
+                        _ -> []
                     }
                   >> updatePointer (0.25, 0.25) (0.25, 0.25)
             }
-            `additionalKeysP` myKeys
+          `additionalKeysP` myKeys
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -140,6 +144,7 @@ myKeys =
        , ("M-S-r", spawn "xrandr --output HDMI-1 --off && xrandr --output HDMI-1 --auto &&  xrandr --output HDMI-1 --above eDP-1")
        , ("M-S-p", spawn emojiPicker)
        , ("M-u", spawn "emacsclient -c -a 'emacs'")
+       , ("M-/", spawn "emacsclient --eval \"(emacs-everywhere)\"")
        , ("M-S-u", spawn "code")
        , ("M-<Escape>", spawn "slock")
        , ("M-q", kill1)
@@ -148,13 +153,16 @@ myKeys =
        , ("M-<Space>", sendMessage (MT.Toggle NBFULL))
        , ("<XF86MonBrightnessUp>", spawn "brightnessctl set 5%+")
        , ("<XF86MonBrightnessDown>", spawn "brightnessctl set 5%-")
-       , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
-       , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
-       , ("<XF86AudioMute>", spawn "amixer sset Master toggle")
+       , ("<XF86AudioLowerVolume>", spawn $ setVolume "-")
+       , ("<XF86AudioRaiseVolume>", spawn $ setVolume "+")
+       , ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
        , ("S-<XF86AudioLowerVolume>", spawn "amixer set Capture 5%- unmute")
        , ("S-<XF86AudioRaiseVolume>", spawn "amixer set Capture 5%+ unmute")
        , ("S-<XF86AudioMute>", spawn "amixer sset Capture toggle")
        ]
+ where
+  setVolume opt = unmute <> "&& wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%" <> opt
+  unmute = "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0"
 
 myStartupHook :: X ()
 myStartupHook = do
