@@ -27,7 +27,7 @@ Config { font            = "DejaVu Sans Mono 10"
                                , "-o", "<fn=1><leftbar></fn>  <timeleft>"
                                , "-H", "10", "-L", "7"
                                ] 50 "batt0"
-                           , Run Date "%b %d %Y - %H:%M " "date" 50
+                           , Run Date "%b %d %Y - %H:%M:%S " "date" 10
                            , Run Com "wpctl" ["get-volume", "@DEFAULT_AUDIO_SINK@"] "vol" 10
                            , Run UnsafeStdinReader
                            ]

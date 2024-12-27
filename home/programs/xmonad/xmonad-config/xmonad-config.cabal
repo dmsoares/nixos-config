@@ -25,3 +25,5 @@ executable xmonad
         xmonad,
         xmonad-contrib,
         xmonad-extras
+
+    main-is: XMonadConfig.hs

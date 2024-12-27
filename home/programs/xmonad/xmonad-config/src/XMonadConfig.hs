@@ -7,23 +7,25 @@ import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS (nextScreen, shiftNextScreen, toggleWS)
 import XMonad.Actions.MouseResize (mouseResize)
+import XMonad.Actions.SpawnOn
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.WithAll (killAll)
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.Focus (Focus (currentWorkspace))
 import XMonad.Hooks.ManageDocks (avoidStruts, manageDocks)
 import XMonad.Layout ((|||))
-import XMonad.Layout.LimitWindows (limitWindows)
+import XMonad.Layout.Grid
 import XMonad.Layout.MultiToggle ((??))
 import XMonad.Layout.MultiToggle qualified as MT
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders (smartBorders, withBorder)
+import XMonad.Layout.PerWorkspace (onWorkspace)
 import XMonad.Layout.Renamed (Rename (..), renamed)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.WindowArranger (windowArrange)
-import XMonad.Layout.WindowNavigation (windowNavigation)
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
@@ -37,11 +39,11 @@ main =
         xmonad
           . ewmh
           $ desktopConfig
-            { manageHook = manageDocks <+> manageHook desktopConfig
+            { manageHook = myManageHook
             , startupHook = myStartupHook
             , layoutHook = myLayoutHook
             , handleEventHook = handleEventHook desktopConfig
-            , workspaces = myWorkspaces
+            , workspaces = myRegularWorkspaces <> myExtraWorkspaces
             , borderWidth = myBorderWidth
             , terminal = myTerminal
             , modMask = myModMask
@@ -97,21 +99,18 @@ myppTitle = "#FDF6E3"
 myppUrgent :: String
 myppUrgent = "#DC322F"
 
-myWorkspaces :: [String]
-myWorkspaces = show <$> [1 :: Int .. 9]
+myRegularWorkspaces :: [String]
+myRegularWorkspaces = show <$> [1 :: Int .. 9]
 
-scratchpads :: [NamedScratchpad]
-scratchpads =
-  [ NS "music" "spotify" (className =? "Spotify") (customFloating $ W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3))
-  , NS "todo" "emacsclient -c -a 'emacs' -F '((name . \"emacs-todo\"))' ~/Documents/todo.md" (title =? "emacs-todo") defaultFloating
-  ]
+myExtraWorkspaces :: [String]
+myExtraWorkspaces = ["T"]
 
 clickable :: String -> String
 clickable ws = case M.lookup ws myWorkspaceIndices of
   Just i -> "<action=xdotool key super+" ++ show (i :: Int) ++ ">" ++ ws ++ "</action>"
   _ -> ws
  where
-  myWorkspaceIndices = M.fromList $ zip myWorkspaces [1 .. 9]
+  myWorkspaceIndices = M.fromList $ zip myRegularWorkspaces [1 .. 9]
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -130,13 +129,16 @@ emojiPicker = "rofi -modi emoji -show emoji -emoji-mode copy"
 
 myKeys :: [(String, X ())]
 myKeys =
-  [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
+  [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myRegularWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
     ++ [ ("M-<Return>", spawn myTerminal)
+       , ("M-t", toggleTerminalWS)
+       , ("M-r", withFocused $ windows . W.sink)
        , ("M-S-m", windows W.swapMaster)
        , ("M-y", nextScreen)
        , ("M-S-y", shiftNextScreen)
-       , ("M-s", namedScratchpadAction scratchpads "music")
-       , ("M-d", namedScratchpadAction scratchpads "todo")
+       , ("M-s", namedScratchpadAction myScratchPads "music")
+       , ("M-d", namedScratchpadAction myScratchPads "todo")
+       , ("M-g", spawn "gscreenshot -s -c")
        , ("M-o", toggleWS)
        , ("M-b", spawn myBrowser)
        , ("M-f", spawn "thunar")
@@ -153,49 +155,73 @@ myKeys =
        , ("M-<Space>", sendMessage (MT.Toggle NBFULL))
        , ("<XF86MonBrightnessUp>", spawn "brightnessctl set 5%+")
        , ("<XF86MonBrightnessDown>", spawn "brightnessctl set 5%-")
-       , ("<XF86AudioLowerVolume>", spawn $ setVolume "-")
-       , ("<XF86AudioRaiseVolume>", spawn $ setVolume "+")
+       , ("<XF86AudioLowerVolume>", spawn lowerVolume)
+       , ("<XF86AudioRaiseVolume>", spawn raiseVolume)
        , ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
        , ("S-<XF86AudioLowerVolume>", spawn "amixer set Capture 5%- unmute")
        , ("S-<XF86AudioRaiseVolume>", spawn "amixer set Capture 5%+ unmute")
        , ("S-<XF86AudioMute>", spawn "amixer sset Capture toggle")
        ]
  where
-  setVolume opt = unmute <> "&& wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%" <> opt
-  unmute = "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0"
+  unmute = "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && "
+  changeVolume direction = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%" <> direction
+  raiseVolume = unmute <> changeVolume "+"
+  lowerVolume = changeVolume "-"
+  toggleTerminalWS = do
+    tag <- W.currentTag <$> gets windowset
+    if tag == "T"
+      then toggleWS
+      else windows (W.greedyView "T") >> sendMessage (JumpToLayout "Grid")
 
 myStartupHook :: X ()
-myStartupHook = do
-  spawn "feh --bg-fill --auto-zoom ~/.fehbg"
-  spawn "emacs --daemon"
-  spawn "blueman-applet"
+myStartupHook =
+  composeAll
+    [ spawn "feh --bg-fill --auto-zoom ~/.fehbg"
+    , spawn "emacs --daemon"
+    , spawn "blueman-applet"
+    , spawnOn "T" myTerminal
+    ]
+
+rectCentered :: Rational -> W.RationalRect
+rectCentered percentage = W.RationalRect offset offset percentage percentage
+ where
+  offset = (1 - percentage) / 2
+
+myManageHook :: ManageHook
+myManageHook =
+  composeAll
+    [ className =? ".gscreenshot-wrapped" --> defaultFloating
+    , className =? ".blueman-manager-wrapped" --> customFloating (rectCentered 0.5)
+    , manageSpawn
+    , manageDocks
+    , namedScratchpadManageHook myScratchPads
+    ]
+
+myScratchPads :: [NamedScratchpad]
+myScratchPads =
+  [ NS "music" "spotify" (className =? "Spotify") (customFloating $ rectCentered 0.8)
+  , NS "todo" "emacsclient -c -a 'emacs' -F '((name . \"emacs-todo\"))' ~/Documents/todo.md" (title =? "emacs-todo") nonFloating
+  ]
 
 myLayoutHook =
   smartBorders
     . avoidStruts
     . mouseResize
     . windowArrange
-    $ MT.mkToggle (NBFULL ?? NOBORDERS ?? MT.EOT) myDefaultLayout
+    $ MT.mkToggle (NBFULL ?? NOBORDERS ?? MT.EOT) layouts
  where
-  myDefaultLayout =
-    withBorder myBorderWidth tall
-      ||| threeCol
-      ||| threeRow
+  layouts =
+    withBorder myBorderWidth tall ||| mirroredTall ||| grid ||| threeCol
+
   tall =
-    renamed [Replace "tall"]
-      . limitWindows 5
-      . windowNavigation
+    renamed [Replace "Tall"]
       $ ResizableTall 1 (3 / 100) (1 / 2) []
 
-  threeCol =
-    renamed [Replace "threeCol"]
-      . limitWindows 7
-      . windowNavigation
-      $ ThreeCol 1 (3 / 100) (1 / 2)
+  mirroredTall =
+    renamed [Replace "Tall(M)"]
+      $ Mirror
+      $ ResizableTall 1 (3 / 100) (1 / 2) []
 
-  threeRow =
-    renamed [Replace "threeRow"]
-      . limitWindows 7
-      . windowNavigation
-      . Mirror
-      $ ThreeCol 1 (3 / 100) (1 / 2)
+  grid = Grid
+
+  threeCol = ThreeColMid 1 (3 / 100) (1 / 2)
