@@ -11,16 +11,13 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-22_11, home-manager, nixos-hardware, ... }: {
+  outputs = { nixpkgs, nixpkgs-unstable, nixpkgs-22_11, home-manager, ... }: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         modules = [
           ./configuration.nix
-
-          # tuxedo pulse 15 gen2 specific configuration
-          # nixos-hardware.nixosModules.tuxedo-pulse-15-gen2
 
           # uncomment to apply overlays
           # (args: { nixpkgs.overlays = import ./overlays args; })

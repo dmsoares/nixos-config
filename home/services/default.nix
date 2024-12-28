@@ -8,11 +8,4 @@ let
       };
     };
   };
-in
-[
-  ./dunst
-  ./gpg-agent
-  ./picom
-  ./trayer
-  more
-]
+in [ ./dunst ./gpg-agent ./picom ./trayer more ]

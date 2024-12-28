@@ -12,12 +12,20 @@
     # solving google chrome weird shadows around menus
     # https://github.com/orgs/regolith-linux/discussions/949
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
-      dock = { shadow = false; clip-shadow-above = true; };
+      tooltip = {
+        fade = true;
+        shadow = true;
+        opacity = 0.75;
+        focus = true;
+        full-shadow = false;
+      };
+      dock = {
+        shadow = false;
+        clip-shadow-above = true;
+      };
       dnd = { shadow = false; };
       menu = { shadow = false; };
       dropdown_menu = { opacity = 0.8; };
     };
   };
 }
-

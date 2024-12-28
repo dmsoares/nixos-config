@@ -1,18 +1,13 @@
-args@{ lib, config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
+args@{ lib, _config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
 
 let
   username = "decio";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
 
-in
+in {
 
-{
-
-  imports = lib.concatMap (x: import x args) [
-    ./services
-    ./programs
-  ];
+  imports = lib.concatMap (x: import x args) [ ./services ./programs ];
 
   home = {
     inherit username homeDirectory;
@@ -49,13 +44,14 @@ in
       pkgs-unstable.ghc
       pkgs-unstable.haskellPackages.haskell-language-server
       pkgs-unstable.haskellPackages.fourmolu
+      pkgs-unstable.haskellPackages.cabal-gild
 
       # js
       nodejs
       nodePackages.npm
       pkgs-unstable.deno
       pkgs-unstable.nodePackages.eas-cli
-      pkgs-22_11.nodePackages.pnpm #pnpm v7
+      pkgs-22_11.nodePackages.pnpm # pnpm v7
 
       # infra
       awscli2
@@ -76,10 +72,16 @@ in
       ripgrep
       xorg.xwininfo
       xclip
+      zlib
+
+      # nix
+      nil
+      nixd
+      nixfmt
 
       # postgres
       jetbrains.datagrip
-    
+
       # python
       python3
     ];
@@ -96,10 +98,13 @@ in
   xdg = {
     enable = true;
     inherit configHome;
+    portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
+
   };
 
-  programs = {
-    home-manager.enable = true;
-  };
+  programs = { home-manager.enable = true; };
 
 }
