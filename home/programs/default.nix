@@ -1,6 +1,11 @@
-args@{ pkgs-unstable, ... }:
+args@{ config, pkgs-unstable, rootPath, ... }:
 let
-  more = { pkgs, ... }: {
+  more = { ... }: {
+    xdg.configFile."doom".source =
+      config.lib.file.mkOutOfStoreSymlink "${rootPath}/programs/doom";
+    xdg.configFile."zed".source =
+      config.lib.file.mkOutOfStoreSymlink "${rootPath}/programs/zed";
+
     programs = {
       bat.enable = true;
 
@@ -24,8 +29,8 @@ let
       ssh.enable = true;
     };
   };
-in
-[
+
+in [
   ./alacritty
   ./feh
   ./fzf

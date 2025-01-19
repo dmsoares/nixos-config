@@ -1,0 +1,140 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-space w v": "pane::SplitRight",
+      "shift-space w s": "pane::SplitDown",
+      "shift-space E": "diagnostics::Deploy",
+      "shift-space e k": "editor::GoToPrevDiagnostic",
+      "shift-space e j": "editor::GoToDiagnostic",
+      "shift-space e e": ["workspace::SendKeystrokes", "g h"],
+      "shift-space e f": "editor::ToggleCodeActions",
+      "shift-space e w": "diagnostics::ToggleWarnings",
+      "shift-space w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "shift-space w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "shift-space w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "shift-space w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "shift-space w H": ["workspace::SwapPaneInDirection", "Left"],
+      "shift-space w J": ["workspace::SwapPaneInDirection", "Down"],
+      "shift-space w L": ["workspace::SwapPaneInDirection", "Right"],
+      "shift-space w K": ["workspace::SwapPaneInDirection", "Up"],
+      "shift-space w d": "pane::CloseAllItems",
+      "shift-space b D": "pane::CloseInactiveItems",
+      "shift-space b d": "pane::CloseActiveItem",
+      "shift-space f f": "project_panel::ToggleFocus",
+      "shift-space t t": "workspace::ToggleLeftDock",
+      "shift-space T c": "workspace::ToggleCenteredLayout",
+      "shift-space p p": "projects::OpenRecent",
+      "shift-space b o": "pane::ActivatePrevItem",
+      "shift-space b i": "pane::ActivateNextItem",
+      "shift-space b l": ["workspace::SendKeystrokes", "shift-space tab enter"],
+      "shift-space /": "workspace::NewSearch",
+      "shift-space S": "project_symbols::Toggle",
+      "shift-space s": "outline::Toggle",
+      "shift-space tab": "tab_switcher::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && (vim_operator == none || vim_operator == n) && !VimWaiting",
+    "bindings": {
+      "alt-j": "vim::LineDown",
+      "alt-k": "vim::LineUp",
+      "space w v": "pane::SplitRight",
+      "space w s": "pane::SplitDown",
+      "space E": "diagnostics::Deploy",
+      "space e k": "editor::GoToPrevDiagnostic",
+      "space e j": "editor::GoToDiagnostic",
+      "space e e": ["workspace::SendKeystrokes", "g h"],
+      "space e f": "editor::ToggleCodeActions",
+      "space e w": "diagnostics::ToggleWarnings",
+      "space w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "space w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "space w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "space w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "space w H": ["workspace::SwapPaneInDirection", "Left"],
+      "space w J": ["workspace::SwapPaneInDirection", "Down"],
+      "space w L": ["workspace::SwapPaneInDirection", "Right"],
+      "space w K": ["workspace::SwapPaneInDirection", "Up"],
+      "space w d": "pane::CloseAllItems",
+      "space b D": "pane::CloseInactiveItems",
+      "space b d": "pane::CloseActiveItem",
+      "space b l": ["workspace::SendKeystrokes", "space tab enter"],
+      "space f f": "project_panel::ToggleFocus",
+      "space t t": "workspace::ToggleLeftDock",
+      "space T c": "workspace::ToggleCenteredLayout",
+      "space p p": "projects::OpenRecent",
+      "space b o": "pane::ActivatePrevItem",
+      "space b i": "pane::ActivateNextItem",
+      "space /": "workspace::NewSearch",
+      "space S": "project_symbols::Toggle",
+      "space s": "outline::Toggle",
+      "space tab": "tab_switcher::Toggle",
+      "space g b": "editor::ToggleGitBlameInline",
+      "space g B": "editor::ToggleGitBlame"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "up": "editor::ContextMenuPrev",
+      "ctrl-k": "editor::ContextMenuPrev",
+      "down": "editor::ContextMenuNext",
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-h": "editor::ContextMenuFirst",
+      "ctrl-l": "editor::ContextMenuLast"
+    }
+  },
+  {
+    "context": "Picker || menu",
+    "bindings": {
+      "ctrl-k": "menu::SelectPrev",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-h": "menu::SelectFirst",
+      "ctrl-l": "menu::SelectLast"
+    }
+  },
+  {
+    "context": "Prompt",
+    "bindings": {
+      "ctrl-h": "menu::SelectPrev",
+      "ctrl-l": "menu::SelectNext"
+    }
+  },
+  {
+    "context": "ProjectPanel && !editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "d": "project_panel::NewDirectory",
+      "x": "project_panel::Delete",
+      "r": "project_panel::Rename",
+      "escape": "workspace::ToggleLeftDock",
+      "enter": ["workspace::SendKeystrokes", "enter space t t"]
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "space w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "space w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "space w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "space w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "space w d": "workspace::ToggleLeftDock",
+      "space t t": "workspace::ToggleLeftDock",
+      "space p p": "projects::OpenRecent",
+      "ctrl-p": "file_finder::Toggle"
+    }
+  }
+]

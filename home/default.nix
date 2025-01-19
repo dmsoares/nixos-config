@@ -1,18 +1,21 @@
-args@{ lib, _config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
+args'@{ lib, config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
 
 let
   username = "decio";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
+  rootPath = "${config.home.homeDirectory}/nixos-config/home";
+
+  args = args' // { inherit rootPath; };
 
 in {
-
   imports = lib.concatMap (x: import x args) [ ./services ./programs ];
 
   home = {
     inherit username homeDirectory;
 
     packages = with pkgs; [
+      # apps
       discord
       gimp
       google-chrome
@@ -59,6 +62,9 @@ in {
       kubectl
       ssm-session-manager-plugin # aws ssm plugin
 
+      # markdown
+      mdl
+
       # misc
       alsa-lib
       fd
@@ -68,6 +74,7 @@ in {
       gnumake
       inotify-tools
       libnotify
+      pandoc
       peek
       ripgrep
       xorg.xwininfo
@@ -101,10 +108,9 @@ in {
     portal = {
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config = { common = { default = [ "gtk" ]; }; };
     };
-
   };
 
   programs = { home-manager.enable = true; };
-
 }

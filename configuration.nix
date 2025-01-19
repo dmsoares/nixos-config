@@ -2,14 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -58,11 +57,7 @@
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
-    };
+    settings = { General = { Enable = "Source,Sink,Media,Socket"; }; };
   };
   hardware.pulseaudio.enable = false;
   services.blueman.enable = true;
@@ -76,7 +71,6 @@
     isNormalUser = true;
     description = "Decio Soares";
     extraGroups = [ "networkmanager" "wheel" "docker" "plugdev" "adbusers" ];
-    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -119,19 +113,17 @@
   # Thunar
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
+    plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
   };
   programs.xfconf.enable = true;
-
 
   # Fonts
   fonts.packages = with pkgs; [
     meslo-lgs-nf
     monaspace
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override {
+      fonts = [ "Hasklig" "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly" ];
+    })
   ];
   fonts.fontDir.enable = true;
 
@@ -151,11 +143,12 @@
   programs.adb.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-    android-tools
-  ];
+  programs.nix-ld.libraries = with pkgs;
+    [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+      android-tools
+    ];
 
   # List services that you want to enable:
 
@@ -187,13 +180,9 @@
       autoRepeatDelay = 125;
       autoRepeatInterval = 20;
 
-      desktopManager = {
-        xterm.enable = false;
-      };
+      desktopManager = { xterm.enable = false; };
 
-      displayManager = {
-        gdm.enable = true;
-      };
+      displayManager = { gdm.enable = true; };
 
       windowManager.xmonad = {
         enable = true;
@@ -208,9 +197,7 @@
       };
     };
 
-    displayManager = {
-      defaultSession = "none+xmonad";
-    };
+    displayManager = { defaultSession = "none+xmonad"; };
 
     libinput = {
       enable = true;
@@ -276,7 +263,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
 
   # Limit the number of generations to keep
   # boot.loader.systemd-boot.configurationLimit = 10;

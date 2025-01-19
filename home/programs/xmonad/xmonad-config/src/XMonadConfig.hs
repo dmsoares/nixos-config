@@ -63,7 +63,7 @@ main =
                                     (ws : l : _ : ex) -> [ws, l] ++ ex
                                     _ -> []
                                 }
-                            >> updatePointer (0.25, 0.25) (0.25, 0.25)
+                            >> updatePointer (0, 0) (0, 0)
                     }
                 `additionalKeysP` myKeys
 
@@ -130,6 +130,7 @@ myKeys =
     [("M-" ++ m ++ k, windows $ f i) | (i, k) <- zip myRegularWorkspaces (map show [1 :: Int ..]), (f, m) <- [(W.greedyView, ""), (W.shift, "S-"), (copy, "S-C-")]]
         ++ [ ("M-<Return>", spawn myTerminal)
            , ("M-t", toggleTerminalWS)
+           , ("M-S-t", windows $ W.shift "T")
            , ("M-r", withFocused $ windows . W.sink)
            , ("M-S-m", windows W.swapMaster)
            , ("M-y", nextScreen)
