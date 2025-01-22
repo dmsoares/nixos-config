@@ -77,6 +77,7 @@ in {
       pandoc
       peek
       ripgrep
+      shellcheck
       xorg.xwininfo
       xclip
       zlib

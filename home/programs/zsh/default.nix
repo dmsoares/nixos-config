@@ -16,6 +16,7 @@
       export ANDROID_HOME=$HOME/Android/Sdk
       export PATH=$PATH:$ANDROID_HOME/emulator
       export PATH=$PATH:$ANDROID_HOME/platform-tools
+      export PATH=$PATH:$XDG_CONFIG_HOME/emacs/bin
     '';
 
     plugins = [
@@ -33,9 +34,7 @@
 
     zplug = {
       enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; }
-      ];
+      plugins = [{ name = "zsh-users/zsh-autosuggestions"; }];
     };
 
     history = {
