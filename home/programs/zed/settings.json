@@ -71,6 +71,9 @@
     }
   },
   "languages": {
+    "Gleam": {
+      "show_inline_completions": false
+    },
     "Haskell": {
       "show_inline_completions": false
     }

@@ -6,6 +6,22 @@ let
   configHome = "${homeDirectory}/.config";
   rootPath = "${config.home.homeDirectory}/nixos-config/home";
 
+  theme = {
+    name = "palenight";
+    package = pkgs.palenight-theme;
+  };
+
+  iconTheme = {
+    name = "Papirus-Dark";
+    package = pkgs.papirus-icon-theme;
+  };
+
+  cursor = {
+    name = "capitaine-cursors";
+    package = pkgs.capitaine-cursors;
+    size = 24;
+  };
+
   args = args' // { inherit rootPath; };
 
 in {
@@ -32,9 +48,9 @@ in {
       pkgs-unstable.zed-editor
 
       # beam
-      erlang_26
+      erlang_27
       elixir
-      gleam
+      pkgs-unstable.gleam
       rebar3
 
       # c/c++
@@ -52,9 +68,9 @@ in {
       # js
       nodejs
       nodePackages.npm
+      nodePackages.pnpm
       pkgs-unstable.deno
       pkgs-unstable.nodePackages.eas-cli
-      pkgs-22_11.nodePackages.pnpm # pnpm v7
 
       # infra
       awscli2
@@ -71,10 +87,12 @@ in {
       fzf
       gh
       jq
+      gnome-themes-extra
       gnumake
       inotify-tools
       libnotify
       pandoc
+      pavucontrol
       peek
       ripgrep
       shellcheck
@@ -100,6 +118,14 @@ in {
       TERMINAL = "alacritty";
     };
 
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      name = cursor.name;
+      package = cursor.package;
+      size = cursor.size;
+    };
+
     stateVersion = "23.11";
   };
 
@@ -114,4 +140,39 @@ in {
   };
 
   programs = { home-manager.enable = true; };
+
+  gtk = {
+    enable = true;
+
+    iconTheme = {
+      name = iconTheme.name;
+      package = iconTheme.package;
+    };
+    cursorTheme = {
+      name = cursor.name;
+      package = cursor.package;
+    };
+    theme = {
+      name = theme.name;
+      package = theme.package;
+    };
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = theme.name;
+    };
+  };
+
 }

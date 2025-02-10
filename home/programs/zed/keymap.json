@@ -72,6 +72,8 @@
       "space b D": "pane::CloseInactiveItems",
       "space b d": "pane::CloseActiveItem",
       "space b l": ["workspace::SendKeystrokes", "space tab enter"],
+      "space b b": "tab_switcher::Toggle",
+      "space tab": "tab_switcher::Toggle",
       "space f f": "project_panel::ToggleFocus",
       "space t t": "workspace::ToggleLeftDock",
       "space T c": "workspace::ToggleCenteredLayout",
@@ -81,7 +83,6 @@
       "space /": "workspace::NewSearch",
       "space S": "project_symbols::Toggle",
       "space s": "outline::Toggle",
-      "space tab": "tab_switcher::Toggle",
       "space g b": "editor::ToggleGitBlameInline",
       "space g B": "editor::ToggleGitBlame"
     }

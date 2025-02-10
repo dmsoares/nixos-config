@@ -25,6 +25,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.WindowArranger (windowArrange)
 import XMonad.StackSet qualified as W
+import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (spawnPipe)
@@ -138,6 +139,8 @@ myKeys =
            , ("M-s", namedScratchpadAction myScratchPads "music")
            , ("M-d", namedScratchpadAction myScratchPads "todo")
            , ("M-g", spawn "gscreenshot -s -c")
+           , ("M-S-g", spawn "gscreenshot")
+           , ("M-v", spawn "peek")
            , ("M-o", toggleWS)
            , ("M-b", spawn myBrowser)
            , ("M-f", spawn "thunar")
@@ -179,6 +182,7 @@ myStartupHook =
         , spawn "emacs --daemon"
         , spawn "blueman-applet"
         , spawnOn "T" myTerminal
+        , setDefaultCursor xC_left_ptr
         ]
 
 rectCentered :: Rational -> W.RationalRect
@@ -191,6 +195,8 @@ myManageHook =
     composeAll
         [ className =? ".gscreenshot-wrapped" --> defaultFloating
         , className =? ".blueman-manager-wrapped" --> customFloating (rectCentered 0.5)
+        , className =? "pavucontrol" --> customFloating (rectCentered 0.5)
+        , className =? "peek" --> defaultFloating
         , manageSpawn
         , manageDocks
         , namedScratchpadManageHook myScratchPads
