@@ -70,7 +70,7 @@ in {
       nodePackages.npm
       nodePackages.pnpm
       pkgs-unstable.deno
-      pkgs-unstable.nodePackages.eas-cli
+      # pkgs-unstable.nodePackages.eas-cli
 
       # infra
       awscli2
