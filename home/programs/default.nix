@@ -30,15 +30,20 @@ let
     };
   };
 
+  vscode = import ./vscode args;
+  zsh = import ./zsh
+    (args // { vscodePath = "${vscode.programs.vscode.package}/bin/code"; });
+
 in [
   ./alacritty
   ./feh
   ./fzf
   ./git
+  ./neovim
   ./rofi
-  (import ./vscode args)
   ./xmobar
   ./xmonad
-  ./zsh
   more
+  vscode
+  zsh
 ]

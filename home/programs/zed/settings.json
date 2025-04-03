@@ -7,20 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "inline_completions": {
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/secrets.yml"
+    ]
+  },
+  "show_inline_completions": true,
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
   "tab_bar": {
     "show": false
   },
   "buffer_font_family": "FiraCode Nerd Font",
   "assistant": {
     "default_model": {
-      "provider": "google",
-      "model": "gemini-1.5-flash"
+      "provider": "copilot_chat",
+      "model": "o1"
     },
     "version": "2"
   },
   "vim_mode": true,
   "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "buffer_font_size": 15.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
@@ -71,6 +85,9 @@
     }
   },
   "languages": {
+    "TypeScript": {
+      "show_inline_completions": true
+    },
     "Gleam": {
       "show_inline_completions": false
     },

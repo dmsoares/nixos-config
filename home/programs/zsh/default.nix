@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vscodePath, ... }:
 
 {
   programs.zsh = {
@@ -18,6 +18,12 @@
       export PATH=$PATH:$ANDROID_HOME/platform-tools
       export PATH=$PATH:$XDG_CONFIG_HOME/emacs/bin
     '';
+
+    shellAliases = {
+      vscode = vscodePath;
+      zed = "zeditor";
+      ns = "nix-shell --command $SHELL";
+    };
 
     plugins = [
       {

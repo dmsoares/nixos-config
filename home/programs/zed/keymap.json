@@ -42,12 +42,6 @@
     }
   },
   {
-    "context": "Editor",
-    "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
-    }
-  },
-  {
     "context": "Editor && vim_mode == normal && (vim_operator == none || vim_operator == n) && !VimWaiting",
     "bindings": {
       "alt-j": "vim::LineDown",
@@ -126,7 +120,7 @@
     }
   },
   {
-    "context": "Dock",
+    "context": "Dock && !editing",
     "bindings": {
       "space w h": ["workspace::ActivatePaneInDirection", "Left"],
       "space w j": ["workspace::ActivatePaneInDirection", "Down"],
@@ -136,6 +130,46 @@
       "space t t": "workspace::ToggleLeftDock",
       "space p p": "projects::OpenRecent",
       "ctrl-p": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "AssistantPanel",
+    "bindings": {
+      "alt-j": null,
+      "alt-k": null,
+      "space w v": null,
+      "space w s": null,
+      "space E": null,
+      "space e k": null,
+      "space e j": null,
+      "space e e": null,
+      "space e f": null,
+      "space e w": null,
+      "space w h": null,
+      "space w j": null,
+      "space w k": null,
+      "space w l": null,
+      "space w H": null,
+      "space w J": null,
+      "space w L": null,
+      "space w K": null,
+      "space w d": null,
+      "space b D": null,
+      "space b d": null,
+      "space b l": null,
+      "space b b": null,
+      "space tab": null,
+      "space f f": null,
+      "space t t": null,
+      "space T c": null,
+      "space p p": null,
+      "space b o": null,
+      "space b i": null,
+      "space /": null,
+      "space S": null,
+      "space s": null,
+      "space g b": null,
+      "space g B": null
     }
   }
 ]

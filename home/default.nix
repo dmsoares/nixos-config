@@ -1,4 +1,4 @@
-args'@{ lib, config, pkgs, pkgs-unstable, pkgs-22_11, ... }:
+args'@{ lib, config, pkgs, pkgs-unstable, ... }:
 
 let
   username = "decio";

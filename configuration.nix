@@ -90,7 +90,6 @@
     gdb
     git
     gzip
-    neovim
     wget
     zip
     unzip
@@ -145,12 +144,43 @@
   programs.adb.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs;
-    [
-      # Add any missing dynamic libraries for unpackaged programs
-      # here, NOT in environment.systemPackages
-      android-tools
-    ];
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    android-tools
+
+    # electron dependencies
+    glibc
+    glib
+    gtk3
+    atk
+    at-spi2-atk
+    dbus
+    libdrm
+    pango
+    cairo
+    xorg.libX11
+    xorg.libXcomposite
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXrandr
+    xorg.libxcb
+    xorg.libxshmfence
+    libxkbcommon
+    expat
+    mesa
+    alsa-lib
+    at-spi2-core
+    cups
+    nss
+    nspr
+    ffmpeg
+    gdk-pixbuf
+
+    # haskell
+    zlib
+  ];
 
   # List services that you want to enable:
 
@@ -159,9 +189,14 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
-    upower.enable = true;
     autorandr.enable = true;
     tlp.enable = true;
+
+    upower = {
+      enable = true;
+      criticalPowerAction = "Hibernate";
+      percentageCritical = 5;
+    };
 
     # Thunar
     gvfs.enable = true; # Mount, trash, and other functionalities

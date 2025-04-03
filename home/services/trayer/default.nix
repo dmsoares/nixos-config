@@ -16,6 +16,7 @@
       transparent = true;
       alpha = 0;
       tint = "0x282828";
+      iconspacing = 12;
     };
   };
 }
