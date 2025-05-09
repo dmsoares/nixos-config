@@ -7,7 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "edit_predictions": {
+  "inline_completions": {
     "disabled_globs": [
       "**/.env*",
       "**/*.pem",
@@ -17,32 +17,28 @@
       "**/secrets.yml"
     ]
   },
-  // "show_edit_predictions": true,
-  // "features": {
-  //   "edit_prediction_provider": "copilot",
-  //   "edit_prediction_provider_options": {
-  //     "model": "gpt-4",
-  //     "provider": "copilot_chat"
-  //   }
-  // },
+  "show_inline_completions": true,
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
   "tab_bar": {
     "show": false
   },
   "buffer_font_family": "FiraCode Nerd Font",
-  // "assistant": {
-  //   "default_model": {
-  //     "provider": "copilot_chat",
-  //     "model": "gpt-4o"
-  //   },
-  //   "version": "2"
-  // },
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "o1"
+    },
+    "version": "2"
+  },
   "vim_mode": true,
   "ui_font_size": 14,
   "buffer_font_size": 15.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Macchiato"
   },
   "git": {
     "inline_blame": {
@@ -68,13 +64,6 @@
         }
       }
     },
-    "deno": {
-      "settings": {
-        "deno": {
-          "enable": false
-        }
-      }
-    },
     "hls": {
       "initialization_options": {
         "haskell": {
@@ -97,13 +86,13 @@
   },
   "languages": {
     "TypeScript": {
-      "show_edit_predictions": true
+      "show_inline_completions": true
     },
     "Gleam": {
-      "show_edit_predictions": false
+      "show_inline_completions": false
     },
     "Haskell": {
-      "show_edit_predictions": false
+      "show_inline_completions": false
     }
   }
 }

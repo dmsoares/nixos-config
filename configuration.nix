@@ -39,7 +39,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
-  # time.timeZone = "Europe/Madrid";
+  # time.timeZone = "America/Mexico_City";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";

@@ -46,6 +46,9 @@ in {
       vlc
       watchman
       pkgs-unstable.zed-editor
+      file-roller
+      pkgs-unstable.windsurf
+      zoom-us
 
       # beam
       erlang_27
