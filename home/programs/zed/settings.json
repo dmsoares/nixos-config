@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "show_edit_predictions": true,
+  "agent": {
+    "default_profile": "write",
+    "version": "2"
+  },
   "edit_predictions": {
     "disabled_globs": [
       "**/.env*",
@@ -17,25 +22,10 @@
       "**/secrets.yml"
     ]
   },
-  // "show_edit_predictions": true,
-  // "features": {
-  //   "edit_prediction_provider": "copilot",
-  //   "edit_prediction_provider_options": {
-  //     "model": "gpt-4",
-  //     "provider": "copilot_chat"
-  //   }
-  // },
   "tab_bar": {
     "show": false
   },
   "buffer_font_family": "FiraCode Nerd Font",
-  // "assistant": {
-  //   "default_model": {
-  //     "provider": "copilot_chat",
-  //     "model": "gpt-4o"
-  //   },
-  //   "version": "2"
-  // },
   "vim_mode": true,
   "ui_font_size": 14,
   "buffer_font_size": 15.0,
@@ -100,7 +90,7 @@
       "show_edit_predictions": true
     },
     "Gleam": {
-      "show_edit_predictions": false
+      "show_edit_predictions": true
     },
     "Haskell": {
       "show_edit_predictions": false

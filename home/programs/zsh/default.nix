@@ -1,4 +1,4 @@
-{ config, pkgs, vscodePath, ... }:
+{ config, pkgs, lib, vscodePath, ... }:
 
 {
   programs.zsh = {
@@ -8,11 +8,8 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       DISABLE_MAGIC_FUNCTIONS="true"
-    '';
-
-    initExtra = ''
       export ANDROID_HOME=$HOME/Android/Sdk
       export PATH=$PATH:$ANDROID_HOME/emulator
       export PATH=$PATH:$ANDROID_HOME/platform-tools

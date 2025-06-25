@@ -49,6 +49,7 @@ in {
       file-roller
       pkgs-unstable.windsurf
       zoom-us
+      jetbrains.idea-community
 
       # beam
       erlang_27
@@ -67,6 +68,10 @@ in {
       pkgs-unstable.haskellPackages.haskell-language-server
       pkgs-unstable.haskellPackages.fourmolu
       pkgs-unstable.haskellPackages.cabal-gild
+
+      # jvm
+      # jdk24
+      jdk23
 
       # js
       nodejs
@@ -106,7 +111,7 @@ in {
       # nix
       nil
       nixd
-      nixfmt
+      nixfmt-classic
 
       # postgres
       jetbrains.datagrip
@@ -159,16 +164,8 @@ in {
       name = theme.name;
       package = theme.package;
     };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
+    gtk3.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
+    gtk4.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
   };
 
   dconf.settings = {

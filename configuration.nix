@@ -37,6 +37,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Having trouble connecting to a public wifi network?
+  # Temporarily uncomment this line:
+  # networking.resolvconf.dnsExtensionMechanism = false;
+
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
   # time.timeZone = "America/Mexico_City";
@@ -61,7 +65,7 @@
     enable = true;
     settings = { General = { Enable = "Source,Sink,Media,Socket"; }; };
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.blueman.enable = true;
 
   systemd.services.upower.enable = true;
@@ -122,9 +126,10 @@
   fonts.packages = with pkgs; [
     meslo-lgs-nf
     monaspace
-    (nerdfonts.override {
-      fonts = [ "Hasklig" "FiraCode" "DroidSansMono" "NerdFontsSymbolsOnly" ];
-    })
+    nerd-fonts.hasklug
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.symbols-only
   ];
   fonts.fontDir.enable = true;
 
