@@ -41,7 +41,7 @@ in {
       mate.atril
       telegram-desktop
       spotify
-      pkgs-unstable.emacs
+      emacs
       pkgs-unstable.obsidian
       vlc
       watchman
@@ -60,6 +60,10 @@ in {
       # c/c++
       gcc
 
+      # dbs
+      jetbrains.datagrip
+      sqlite
+
       # haskell
       pkgs-unstable.cabal2nix
       pkgs-unstable.nix-prefetch-git
@@ -74,9 +78,8 @@ in {
       jdk23
 
       # js
-      nodejs
-      nodePackages.npm
-      nodePackages.pnpm
+      nodejs_20
+      pnpm
       pkgs-unstable.deno
       # pkgs-unstable.nodePackages.eas-cli
 
@@ -88,6 +91,7 @@ in {
 
       # markdown
       mdl
+      texliveMedium # Emacs org mode
 
       # misc
       alsa-lib
@@ -112,9 +116,6 @@ in {
       nil
       nixd
       nixfmt-classic
-
-      # postgres
-      jetbrains.datagrip
 
       # python
       python3
