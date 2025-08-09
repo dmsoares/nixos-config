@@ -9,37 +9,50 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }: {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      home = [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hmbackup_00";
 
-        modules = [
-          ./configuration.nix
+          home-manager.users.decio = import ./home;
 
-          # uncomment to apply overlays
-          # (args: { nixpkgs.overlays = import ./overlays args; })
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "hmbackup_00";
-
-            home-manager.users.decio = import ./home;
-
-            home-manager.extraSpecialArgs = {
-              pkgs-unstable = import nixpkgs-unstable {
-                system = system;
-                config.allowUnfree = true;
-                config.permittedInsecurePackages = [ "electron-25.9.0" ];
-              };
+          home-manager.extraSpecialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              system = system;
+              config.allowUnfree = true;
+              config.permittedInsecurePackages = [ "electron-25.9.0" ];
             };
-          }
-        ];
-      };
-    };
+          };
+        }
+      ];
+    in {
+      nixosConfigurations = {
+        hp-desktop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./machines/hp-desktop/configuration.nix
 
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-  };
+            # uncomment to apply overlays
+            # (args: { nixpkgs.overlays = import ./overlays args; })
+          ] ++ home;
+        };
+
+        thinkpad-laptop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./machines/thinkpad-laptop/configuration.nix
+
+            # uncomment to apply overlays
+            # (args: { nixpkgs.overlays = import ./overlays args; })
+          ] ++ home;
+        };
+      };
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+    };
 }

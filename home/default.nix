@@ -104,6 +104,7 @@ in {
       jq
       gnome-themes-extra
       gnumake
+      graphviz
       inotify-tools
       libnotify
       pandoc

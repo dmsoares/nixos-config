@@ -9,8 +9,7 @@
 {
   "show_edit_predictions": true,
   "agent": {
-    "default_profile": "write",
-    "version": "2"
+    "default_profile": "write"
   },
   "edit_predictions": {
     "disabled_globs": [
@@ -88,12 +87,6 @@
   "languages": {
     "TypeScript": {
       "show_edit_predictions": true
-    },
-    "Gleam": {
-      "show_edit_predictions": true
-    },
-    "Haskell": {
-      "show_edit_predictions": false
     }
   }
 }
