@@ -32,6 +32,7 @@ in {
 
     packages = with pkgs; [
       # apps
+      anki
       discord
       gimp
       google-chrome
@@ -50,6 +51,8 @@ in {
       pkgs-unstable.windsurf
       zoom-us
       jetbrains.idea-community
+      syncthing
+      syncthingtray
 
       # beam
       erlang_27
