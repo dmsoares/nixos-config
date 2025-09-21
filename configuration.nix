@@ -181,7 +181,6 @@
   services = {
     gnome.gnome-keyring.enable = true;
     autorandr.enable = true;
-    tlp.enable = true;
 
     upower = {
       enable = true;

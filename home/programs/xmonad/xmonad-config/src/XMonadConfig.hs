@@ -66,7 +66,7 @@ main =
                                 }
                             >> updatePointer (0, 0) (0, 0)
                     }
-                `additionalKeysP` myKeys
+                    `additionalKeysP` myKeys
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -115,7 +115,7 @@ windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myBrowser :: String
-myBrowser = "google-chrome-stable"
+myBrowser = "google-chrome-stable --high-dpi-support=1 --force-device-scale-factor=1.5"
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -219,13 +219,13 @@ myLayoutHook =
         withBorder myBorderWidth tall ||| mirroredTall ||| grid ||| threeCol
 
     tall =
-        renamed [Replace "Tall"]
-            $ ResizableTall 1 (3 / 100) (1 / 2) []
+        renamed [Replace "Tall"] $
+            ResizableTall 1 (3 / 100) (1 / 2) []
 
     mirroredTall =
-        renamed [Replace "Tall(M)"]
-            $ Mirror
-            $ ResizableTall 1 (3 / 100) (1 / 2) []
+        renamed [Replace "Tall(M)"] $
+            Mirror $
+                ResizableTall 1 (3 / 100) (1 / 2) []
 
     grid = Grid
 

@@ -16,4 +16,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-thinkpad"; # Define your hostname.
+
+  services.tlp.enable = true;
 }

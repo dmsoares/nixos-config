@@ -17,4 +17,6 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
+
+  services.tlp.enable = true;
 }

@@ -7,9 +7,10 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, tuxedo-nixos, ... }:
     let
       system = "x86_64-linux";
       home = [
@@ -46,6 +47,17 @@
           system = system;
           modules = [
             ./machines/thinkpad-laptop/configuration.nix
+
+            # uncomment to apply overlays
+            # (args: { nixpkgs.overlays = import ./overlays args; })
+          ] ++ home;
+        };
+	
+        tuxedo-laptop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./machines/tuxedo-laptop/configuration.nix
+	    tuxedo-nixos.nixosModules.default
 
             # uncomment to apply overlays
             # (args: { nixpkgs.overlays = import ./overlays args; })

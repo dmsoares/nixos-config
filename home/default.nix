@@ -35,6 +35,7 @@ in {
       anki
       discord
       gimp
+      godot
       google-chrome
       gscreenshot
       kazam
@@ -105,6 +106,7 @@ in {
       gnome-themes-extra
       gnumake
       graphviz
+      haskellPackages.hoogle
       inotify-tools
       libnotify
       pandoc
