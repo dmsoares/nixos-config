@@ -1,5 +1,5 @@
-Config { font            = "DejaVu Sans Mono 10"
-       , additionalFonts = [ "Font Awesome 9" ]
+Config { font            = "xft:DejaVu Sans Mono 10"
+       , additionalFonts = [ "xft:Font Awesome 9" ]
        , bgColor         = "#282828"
        , fgColor         = "#ebdbb2"
        , position        = TopSize L 100 24

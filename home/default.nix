@@ -109,6 +109,7 @@ in {
       haskellPackages.hoogle
       inotify-tools
       libnotify
+      neofetch
       pandoc
       pavucontrol
       peek

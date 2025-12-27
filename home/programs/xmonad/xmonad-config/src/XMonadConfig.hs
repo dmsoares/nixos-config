@@ -29,6 +29,7 @@ import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Scratchpad
 
 main :: IO ()
 main =
@@ -66,7 +67,7 @@ main =
                                 }
                             >> updatePointer (0, 0) (0, 0)
                     }
-                    `additionalKeysP` myKeys
+                `additionalKeysP` myKeys
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -182,6 +183,7 @@ myStartupHook =
         , spawn "emacs --daemon"
         , spawn "blueman-applet"
         , spawnOn "T" myTerminal
+        , spawnOn "T" "tuxedo-control-center"
         , setDefaultCursor xC_left_ptr
         ]
 
@@ -219,13 +221,13 @@ myLayoutHook =
         withBorder myBorderWidth tall ||| mirroredTall ||| grid ||| threeCol
 
     tall =
-        renamed [Replace "Tall"] $
-            ResizableTall 1 (3 / 100) (1 / 2) []
+        renamed [Replace "Tall"]
+            $ ResizableTall 1 (3 / 100) (1 / 2) []
 
     mirroredTall =
-        renamed [Replace "Tall(M)"] $
-            Mirror $
-                ResizableTall 1 (3 / 100) (1 / 2) []
+        renamed [Replace "Tall(M)"]
+            $ Mirror
+            $ ResizableTall 1 (3 / 100) (1 / 2) []
 
     grid = Grid
 
