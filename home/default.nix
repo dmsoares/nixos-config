@@ -51,7 +51,7 @@ in {
       file-roller
       pkgs-unstable.windsurf
       zoom-us
-      jetbrains.idea-community
+      jetbrains.idea-oss
       syncthing
       syncthingtray
 
@@ -78,8 +78,7 @@ in {
       pkgs-unstable.haskellPackages.cabal-gild
 
       # jvm
-      # jdk24
-      jdk23
+      jdk25
 
       # js
       nodejs_20

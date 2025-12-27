@@ -2,9 +2,9 @@
   description = "NixOS configuration: development machine";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
@@ -52,12 +52,12 @@
             # (args: { nixpkgs.overlays = import ./overlays args; })
           ] ++ home;
         };
-	
+
         tuxedo-laptop = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
             ./machines/tuxedo-laptop/configuration.nix
-	    tuxedo-nixos.nixosModules.default
+            tuxedo-nixos.nixosModules.default
 
             # uncomment to apply overlays
             # (args: { nixpkgs.overlays = import ./overlays args; })

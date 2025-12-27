@@ -1,9 +1,9 @@
 {
   programs.git = {
     enable = true;
-    userName = "Decio Soares";
-    userEmail = "decio.msoares@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Decio Soares";
+      user.email = "decio.msoares@gmail.com";
       init.defaultBranch = "main";
     };
   };

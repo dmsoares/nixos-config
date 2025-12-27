@@ -97,6 +97,10 @@
     alias suspend='systemctl suspend'
   '';
 
+  # Home Manager interop
+  environment.pathsToLink =
+    [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   # ZSH
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -197,6 +201,8 @@
       packages = [ pkgs.dconf ];
     };
 
+    displayManager = { gdm.enable = true; };
+
     xserver = {
       enable = true;
 
@@ -208,8 +214,6 @@
       autoRepeatInterval = 20;
 
       desktopManager = { xterm.enable = false; };
-
-      displayManager = { gdm.enable = true; };
 
       windowManager.xmonad = {
         enable = true;
@@ -266,7 +270,7 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_13;
+    package = pkgs.postgresql;
     ensureDatabases = [ "mydatabase" ];
     authentication = pkgs.lib.mkOverride 10 ''
       #type database DBuser origin-address auth-method
