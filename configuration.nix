@@ -177,6 +177,10 @@
     zlib
   ];
 
+  # hyprland
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -201,7 +205,10 @@
       packages = [ pkgs.dconf ];
     };
 
-    displayManager = { gdm.enable = true; };
+    displayManager = {
+      gdm.enable = true;
+      defaultSession = "none+xmonad";
+    };
 
     xserver = {
       enable = true;
@@ -227,8 +234,6 @@
         nowlocker = "/run/wrappers/bin/slock";
       };
     };
-
-    displayManager = { defaultSession = "none+xmonad"; };
 
     libinput = {
       enable = true;

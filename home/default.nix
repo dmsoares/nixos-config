@@ -7,8 +7,10 @@ let
   rootPath = "${config.home.homeDirectory}/nixos-config/home";
 
   theme = {
-    name = "palenight";
-    package = pkgs.palenight-theme;
+    package = pkgs.colloid-gtk-theme;
+    name = "Colloid-Dark";
+    # name = "palenight";
+    # package = pkgs.palenight-theme;
   };
 
   iconTheme = {
@@ -25,7 +27,46 @@ let
   args = args' // { inherit rootPath; };
 
 in {
-  imports = lib.concatMap (x: import x args) [ ./services ./programs ];
+  imports = (lib.concatMap (x: import x args) [ ./services ./programs ])
+    ++ [ ./window-managers/hyprland ];
+
+  # Catppuccin v0.1.3
+  theme = {
+    colorscheme = rec {
+      colors = {
+        rosewater = "F5E0DC";
+        flamingo = "F2CDCD";
+        pink = "F5C2E7";
+        mauve = "CBA6F7";
+        red = "F38BA8";
+        maroon = "EBA0AC";
+        peach = "FAB387";
+        yellow = "F9E2AF";
+        green = "A6E3A1";
+        teal = "94E2D5";
+        sky = "89DCEB";
+        sapphire = "74C7EC";
+        blue = "89B4FA";
+        lavender = "B4BEFE";
+        black0 = "11111B"; # crust
+        black1 = "181825"; # mantle
+        black2 = "1E1E2E"; # base
+        black3 = "313244"; # surface0
+        black4 = "45475A"; # surface1
+        gray0 = "585B70"; # surface2
+        gray1 = "6C7086"; # overlay0
+        gray2 = "7F849C"; # overlay1
+        overlay2 = "9399B2"; # overlay2
+        subtext0 = "A6ADC8"; # subtext0
+        subtext1 = "BAC2DE"; # subtext1
+        white = "CDD6F4"; # text
+      };
+
+      xcolors = lib.mapAttrsRecursive (_: color: "#${color}") colors;
+    };
+
+    wallpaper = ./wallpapers/nix-wallpaper.png;
+  };
 
   home = {
     inherit username homeDirectory;
@@ -33,6 +74,7 @@ in {
     packages = with pkgs; [
       # apps
       anki
+      antigravity
       discord
       gimp
       godot
@@ -171,8 +213,31 @@ in {
       name = theme.name;
       package = theme.package;
     };
-    gtk3.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
-    gtk4.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
+
+    font = {
+      package = pkgs.geist-font;
+      name = "Geist";
+      size = 12;
+    };
+
+    gtk2 = {
+      extraConfig = "gtk-application-prefer-dark-theme = true";
+      configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    };
+
+    gtk3 = {
+      bookmarks = [
+        "file://${config.home.homeDirectory}/Dev"
+        "file://${config.home.homeDirectory}/Documents"
+        "file://${config.home.homeDirectory}/Downloads"
+        "file://${config.home.homeDirectory}/Music"
+        "file://${config.home.homeDirectory}/Pictures"
+        "file://${config.home.homeDirectory}/Videos"
+      ];
+      extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   dconf.settings = {
@@ -182,4 +247,11 @@ in {
     };
   };
 
+  wayland.windowManager.hyprland.settings = {
+    monitor = [
+      # name, resolution, position, scale
+      "eDP-1, highres, auto, auto"
+      "HDMI-A-1, highres, auto-up, auto"
+    ];
+  };
 }

@@ -54,6 +54,7 @@ in [
   ./feh
   ./fzf
   ./git
+  # ./hyprland
   ./neovim
   ./rofi
   ./xmobar
