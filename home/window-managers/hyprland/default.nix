@@ -3,7 +3,8 @@
     ./config/binds.nix
     ./config/rules.nix
     ./config/settings.nix
-    ./programs/waybar.nix
+    ./programs/waybar
+    ./programs/wlogout
     ./services/cliphist.nix
     ./services/dunst.nix
     ./services/hypridle.nix
@@ -20,4 +21,6 @@
       variables = [ "--all" ];
     };
   };
+
+  programs.kitty.enable = true;
 }
