@@ -1,16 +1,13 @@
-args'@{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 
 let
   username = "decio";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
-  rootPath = "${config.home.homeDirectory}/nixos-config/home";
 
   theme = {
     package = pkgs.colloid-gtk-theme;
     name = "Colloid-Dark";
-    # name = "palenight";
-    # package = pkgs.palenight-theme;
   };
 
   iconTheme = {
@@ -24,11 +21,8 @@ let
     size = 24;
   };
 
-  args = args' // { inherit rootPath; };
-
 in {
-  imports = (lib.concatMap (x: import x args) [ ./services ./programs ])
-    ++ [ ./window-managers/hyprland ];
+  imports = [ ./hyprland ./services ./programs ];
 
   # Catppuccin v0.1.3
   theme = {
@@ -245,13 +239,5 @@ in {
       color-scheme = "prefer-dark";
       gtk-theme = theme.name;
     };
-  };
-
-  wayland.windowManager.hyprland.settings = {
-    monitor = [
-      # name, resolution, position, scale
-      "eDP-1, highres, auto, auto"
-      "HDMI-A-1, highres, auto-up, auto"
-    ];
   };
 }

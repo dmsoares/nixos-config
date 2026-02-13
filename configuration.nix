@@ -207,7 +207,7 @@
 
     displayManager = {
       gdm.enable = true;
-      defaultSession = "none+xmonad";
+      defaultSession = "hyprland";
     };
 
     xserver = {
@@ -221,11 +221,6 @@
       autoRepeatInterval = 20;
 
       desktopManager = { xterm.enable = false; };
-
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
 
       xautolock = {
         enable = true;
