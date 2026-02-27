@@ -1,4 +1,4 @@
-{ config, pkgs, lib, vscodePath, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.zsh = {
@@ -17,7 +17,6 @@
     '';
 
     shellAliases = {
-      vscode = vscodePath;
       zed = "zeditor";
       ns = "nix-shell --command $SHELL";
     };

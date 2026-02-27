@@ -1,14 +1,13 @@
-args'@{ lib, config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 
 let
   username = "decio";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
-  rootPath = "${config.home.homeDirectory}/nixos-config/home";
 
   theme = {
-    name = "palenight";
-    package = pkgs.palenight-theme;
+    package = pkgs.colloid-gtk-theme;
+    name = "Colloid-Dark";
   };
 
   iconTheme = {
@@ -22,10 +21,46 @@ let
     size = 24;
   };
 
-  args = args' // { inherit rootPath; };
-
 in {
-  imports = lib.concatMap (x: import x args) [ ./services ./programs ];
+  imports = [ ./hyprland ./services ./programs ];
+
+  # Catppuccin v0.1.3
+  theme = {
+    colorscheme = rec {
+      colors = {
+        rosewater = "F5E0DC";
+        flamingo = "F2CDCD";
+        pink = "F5C2E7";
+        mauve = "CBA6F7";
+        red = "F38BA8";
+        maroon = "EBA0AC";
+        peach = "FAB387";
+        yellow = "F9E2AF";
+        green = "A6E3A1";
+        teal = "94E2D5";
+        sky = "89DCEB";
+        sapphire = "74C7EC";
+        blue = "89B4FA";
+        lavender = "B4BEFE";
+        black0 = "11111B"; # crust
+        black1 = "181825"; # mantle
+        black2 = "1E1E2E"; # base
+        black3 = "313244"; # surface0
+        black4 = "45475A"; # surface1
+        gray0 = "585B70"; # surface2
+        gray1 = "6C7086"; # overlay0
+        gray2 = "7F849C"; # overlay1
+        overlay2 = "9399B2"; # overlay2
+        subtext0 = "A6ADC8"; # subtext0
+        subtext1 = "BAC2DE"; # subtext1
+        white = "CDD6F4"; # text
+      };
+
+      xcolors = lib.mapAttrsRecursive (_: color: "#${color}") colors;
+    };
+
+    wallpaper = ./wallpapers/nix-wallpaper.png;
+  };
 
   home = {
     inherit username homeDirectory;
@@ -33,6 +68,7 @@ in {
     packages = with pkgs; [
       # apps
       anki
+      antigravity
       discord
       gimp
       godot
@@ -64,10 +100,6 @@ in {
       # c/c++
       gcc
 
-      # dbs
-      jetbrains.datagrip
-      sqlite
-
       # haskell
       pkgs-unstable.cabal2nix
       pkgs-unstable.nix-prefetch-git
@@ -77,20 +109,9 @@ in {
       pkgs-unstable.haskellPackages.fourmolu
       pkgs-unstable.haskellPackages.cabal-gild
 
-      # jvm
-      jdk25
-
       # js
-      nodejs_20
+      nodejs
       pnpm
-      pkgs-unstable.deno
-      # pkgs-unstable.nodePackages.eas-cli
-
-      # infra
-      awscli2
-      pkgs-unstable.terraform
-      kubectl
-      ssm-session-manager-plugin # aws ssm plugin
 
       # markdown
       mdl
@@ -171,8 +192,31 @@ in {
       name = theme.name;
       package = theme.package;
     };
-    gtk3.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
-    gtk4.extraConfig = { gtk-application-prefer-dark-theme = "1"; };
+
+    font = {
+      package = pkgs.geist-font;
+      name = "Geist";
+      size = 12;
+    };
+
+    gtk2 = {
+      extraConfig = "gtk-application-prefer-dark-theme = true";
+      configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    };
+
+    gtk3 = {
+      bookmarks = [
+        "file://${config.home.homeDirectory}/Dev"
+        "file://${config.home.homeDirectory}/Documents"
+        "file://${config.home.homeDirectory}/Downloads"
+        "file://${config.home.homeDirectory}/Music"
+        "file://${config.home.homeDirectory}/Pictures"
+        "file://${config.home.homeDirectory}/Videos"
+      ];
+      extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   dconf.settings = {
@@ -181,5 +225,4 @@ in {
       gtk-theme = theme.name;
     };
   };
-
 }

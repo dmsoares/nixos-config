@@ -3,31 +3,31 @@
  * Rofi version: 1.5.4
  **/
 * {
-    yellow:           rgba ( 232, 174, 91, 100 % );
-    red:              rgba ( 205, 92, 92, 100 % );
-    tcyan:            rgba ( 204, 176, 196, 87 % );
-    backlight:        rgba ( 204, 255, 238, 87 % );
-    lightgreen:       rgba ( 136, 204, 34, 100 % );
-    lightcyan:        rgba ( 176, 196, 222, 100 % );
-    green:            rgba ( 134, 175, 128, 100 % );
+    yellow:           rgba ( 249, 226, 175, 100 % );
+    red:              rgba ( 243, 139, 168, 100 % );
+    tcyan:            rgba ( 116, 199, 236, 87 % );
+    backlight:        rgba ( 137, 220, 235, 87 % );
+    lightgreen:       rgba ( 166, 227, 161, 100 % );
+    lightcyan:        rgba ( 148, 226, 213, 100 % );
+    green:            rgba ( 166, 227, 161, 100 % );
     background-color: rgba ( 0, 0, 0, 0 % );
-    lightred:         rgba ( 204, 85, 51, 100 % );
+    lightred:         rgba ( 235, 160, 172, 100 % );
     font:             "JetBrainsMono Nerd Font 24";
-    tlightblack:      rgba ( 85, 68, 68, 80 % );
-    lightmagenta:     rgba ( 153, 102, 0, 100 % );
-    dark:             rgba ( 28, 28, 28, 100 % );
-    lightblack:       rgba ( 85, 68, 68, 100 % );
-    magenta:          rgba ( 222, 184, 135, 100 % );
-    black:            rgba ( 61, 53, 42, 100 % );
+    tlightblack:      rgba ( 49, 50, 68, 80 % );
+    lightmagenta:     rgba ( 245, 194, 231, 100 % );
+    dark:             rgba ( 30, 30, 46, 100 % );
+    lightblack:       rgba ( 69, 71, 90, 100 % );
+    magenta:          rgba ( 203, 166, 247, 100 % );
+    black:            rgba ( 17, 17, 27, 100 % );
     transparent:      rgba ( 0, 0, 0, 0 % );
-    lightwhite:       rgba ( 221, 204, 187, 100 % );
-    lightblue:        rgba ( 135, 206, 235, 100 % );
-    lightyellow:      rgba ( 255, 167, 93, 100 % );
-    cyan:             rgba ( 176, 196, 222, 100 % );
-    white:            rgba ( 187, 170, 153, 100 % );
-    foreground:       rgba ( 255, 238, 221, 100 % );
-    blue:             rgba ( 100, 149, 237, 100 % );
-    highlight:        bold underline rgba ( 255, 255, 255, 100 % );
+    lightwhite:       rgba ( 166, 173, 200, 100 % );
+    lightblue:        rgba ( 137, 220, 235, 100 % );
+    lightyellow:      rgba ( 250, 179, 135, 100 % );
+    cyan:             rgba ( 148, 226, 213, 100 % );
+    white:            rgba ( 205, 214, 244, 100 % );
+    foreground:       rgba ( 205, 214, 244, 100 % );
+    blue:             rgba ( 137, 180, 250, 100 % );
+    highlight:        bold underline rgba ( 205, 214, 244, 100 % );
 }
 window {
     text-color:       var(magenta);
@@ -78,7 +78,7 @@ case-indicator {
 }
 listview {
     padding:          8px ;
-    background-color: rgba ( 28, 28, 28, 80 % );
+    background-color: rgba ( 30, 30, 46, 80 % );
     dynamic:          false;
     border-color:     var(foreground);
     lines:            10;

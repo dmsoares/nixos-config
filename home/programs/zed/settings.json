@@ -9,7 +9,11 @@
 {
   "show_edit_predictions": true,
   "agent": {
-    "default_profile": "write"
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-flash",
+    },
+    "default_profile": "write",
   },
   "edit_predictions": {
     "disabled_globs": [
@@ -18,32 +22,32 @@
       "**/*.key",
       "**/*.cert",
       "**/*.crt",
-      "**/secrets.yml"
-    ]
+      "**/secrets.yml",
+    ],
   },
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "buffer_font_family": "FiraCode Nerd Font",
   "vim_mode": true,
-  "ui_font_size": 10,
-  "buffer_font_size": 10.0,
+  "ui_font_size": 18.0,
+  "buffer_font_size": 14.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "Catppuccin Mocha",
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "vim": {
-    "toggle_relative_line_numbers": true
+    "toggle_relative_line_numbers": true,
   },
   "inlay_hints": {
     // Global switch to toggle hints on and off, switched off by default.
-    "enabled": false
+    "enabled": false,
   },
   "lsp": {
     "vtsls": {
@@ -51,42 +55,38 @@
         "typescript": {
           "tsserver": {
             "experimental": {
-              "enableProjectDiagnostics": true
-            }
-          }
-        }
-      }
-    },
-    "deno": {
-      "settings": {
-        "deno": {
-          "enable": false
-        }
-      }
+              "enableProjectDiagnostics": true,
+            },
+          },
+        },
+      },
     },
     "hls": {
       "initialization_options": {
         "haskell": {
-          "formattingProvider": "fourmolu"
-        }
-      }
+          "formattingProvider": "fourmolu",
+        },
+      },
     },
     "nil": {
       "settings": {
         "formatting": {
-          "command": ["nixfmt"]
+          "command": ["nixfmt"],
         },
         "nix": {
           "flake": {
-            "autoArchive": true
-          }
-        }
-      }
-    }
+            "autoArchive": true,
+          },
+        },
+      },
+    },
   },
   "languages": {
     "TypeScript": {
-      "show_edit_predictions": true
-    }
-  }
+      "show_edit_predictions": true,
+    },
+    "Racket": {
+      "show_edit_predictions": false,
+    },
+  },
 }
