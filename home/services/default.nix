@@ -1,5 +1,5 @@
 { ... }: {
-  imports = [ ./gpg-agent ];
+  imports = [ ./gpg-agent ./tuxedo-control-center.nix ];
 
   services = {
     gnome-keyring = {

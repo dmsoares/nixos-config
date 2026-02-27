@@ -7,7 +7,7 @@
           # See 'https://hyprpanel.com/configuration/panel.html'.
           "0" = {
             "left" = [ "dashboard" "workspaces" "windowtitle" ];
-            "middle" = [ "media" ];
+            "middle" = [ "media" "netstat" ];
             "right" = [
               "volume"
               "network"
@@ -77,12 +77,25 @@
 
         notification.opacity = 100;
 
+        osd.scaling = 90;
+
         bar = {
           menus.opacity = 100;
           transparent = false;
           border.location = "none";
 
           outer_spacing = "0";
+
+          scaling = 80;
+
+          menus.menu.dashboard.scaling = 90;
+          menus.menu.media.scaling = 90;
+          menus.menu.volume.scaling = 90;
+          menus.menu.network.scaling = 90;
+          menus.menu.bluetooth.scaling = 90;
+          menus.menu.battery.scaling = 90;
+          menus.menu.clock.scaling = 90;
+          menus.menu.notifications.scaling = 90;
 
           buttons = {
             style = "default";

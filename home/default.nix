@@ -100,10 +100,6 @@ in {
       # c/c++
       gcc
 
-      # dbs
-      jetbrains.datagrip
-      sqlite
-
       # haskell
       pkgs-unstable.cabal2nix
       pkgs-unstable.nix-prefetch-git
@@ -113,20 +109,9 @@ in {
       pkgs-unstable.haskellPackages.fourmolu
       pkgs-unstable.haskellPackages.cabal-gild
 
-      # jvm
-      jdk25
-
       # js
-      nodejs_20
+      nodejs
       pnpm
-      pkgs-unstable.deno
-      # pkgs-unstable.nodePackages.eas-cli
-
-      # infra
-      awscli2
-      pkgs-unstable.terraform
-      kubectl
-      ssm-session-manager-plugin # aws ssm plugin
 
       # markdown
       mdl

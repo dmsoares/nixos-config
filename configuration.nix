@@ -51,7 +51,7 @@
     enable = true;
     settings = { General = { Enable = "Source,Sink,Media,Socket"; }; };
   };
-  services.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
   services.blueman.enable = true;
 
   systemd.services.upower.enable = true;
@@ -135,9 +135,6 @@
     enableSSHSupport = true;
   };
 
-  # android dev
-  programs.adb.enable = true;
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
@@ -165,7 +162,7 @@
     libxkbcommon
     expat
     mesa
-    alsa-lib
+    # alsa-lib
     at-spi2-core
     cups
     nss

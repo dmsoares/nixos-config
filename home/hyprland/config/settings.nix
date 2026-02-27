@@ -10,6 +10,8 @@
     ];
 
     env = [
+      "GDK_SCALE,2"
+      "XCURSOR_SIZE,32"
       "CLUTTER_BACKEND,wayland"
       "GDK_BACKEND,wayland,x11,*"
       "SDL_VIDEODRIVER,wayland"
