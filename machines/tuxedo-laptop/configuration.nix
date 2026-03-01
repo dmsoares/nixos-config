@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -15,24 +15,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # hardware.tuxedo-drivers.enable = true;
+  # Kernel 6.14+ required for Hawk Point APU (ACP 7.0 DMIC, etc.)
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  hardware.tuxedo-drivers.enable = true;
   hardware.tuxedo-control-center.enable = true;
 
   programs.steam.enable = true;
-
-  # services.jack = {
-  #   jackd.enable = true;
-  #   # support ALSA only programs via ALSA JACK PCM plugin
-  #   alsa.enable = false;
-  #   # support ALSA only programs via loopback device (supports programs like Steam)
-  #   loopback = {
-  #     enable = true;
-  #     # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
-  #     #dmixConfig = ''
-  #     #  period_size 2048
-  #     #'';
-  #   };
-  # };
 
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
@@ -40,18 +29,18 @@
     HandleLidSwitchDocked = "ignore";
   };
 
-  # security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
+  # Firmware (includes AMD ACP/DMIC firmware needed for internal microphone)
+  hardware.enableRedistributableFirmware = true;
 
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   # Uncomment the following line if you want to use JACK applications
-  #   jack.enable = true;
-  # };
-
-  # users.extraUsers.decio.extraGroups = [ "jackaudio" ];
+  # Audio (PipeWire)
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   networking.hostName = "tuxedo-laptop"; # Define your hostname.
 }

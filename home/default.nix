@@ -69,6 +69,7 @@ in {
       # apps
       anki
       antigravity
+      pkgs-unstable.claude-code
       discord
       gimp
       godot
@@ -85,9 +86,7 @@ in {
       watchman
       pkgs-unstable.zed-editor
       file-roller
-      pkgs-unstable.windsurf
       zoom-us
-      jetbrains.idea-oss
       syncthing
       syncthingtray
 
