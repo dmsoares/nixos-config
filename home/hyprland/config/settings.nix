@@ -123,10 +123,11 @@
 
     gesture = [
       "3, horizontal, workspace"
-      "3, up, dispatcher, hyprexpo:expo"
-      "3, down, close"
       "4, swipe, move"
+      "4, swipe, mod: SUPER, resize"
     ];
+
+    hyprexpo-gesture = [ "3, up, expo" ];
 
     plugin = {
       hyprexpo = {
@@ -135,20 +136,8 @@
         bg_col = "rgb(${colors.black0})";
         workspace_method =
           "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-        gesture_distance = 300; # how far is the "max" for the gesture
+        gesture_distance = 250; # how far is the "max" for the gesture
       };
     };
-
-    # plugin = {
-    #   hyprexpo = {
-    #     columns = 3;
-    #     gap_size = 4;
-    #     bg_col = "rgb(${colors.black0})";
-    #     enable_gesture = true;
-    #     gesture_fingers = 3;
-    #     gesture_distance = 300;
-    #     gesture_positive = false;
-    #   };
-    # };
   };
 }
