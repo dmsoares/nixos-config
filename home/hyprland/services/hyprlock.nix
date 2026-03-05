@@ -1,20 +1,17 @@
 { config, ... }: {
   programs.hyprlock = {
     enable = true;
-    settings = let inherit (config.theme.colorscheme) colors;
+    settings = let
+      inherit (config.theme.colorscheme) colors;
+      inherit (config.theme) wallpaper;
     in {
       general = {
-        disable_loading_bar = true;
         hide_cursor = true;
       };
 
       background = [{
         monitor = "";
-        path = "screenshot";
-        blur_passes = 2;
-        blur_size = 2;
-        new_optimizations = true;
-        ignore_opacity = false;
+        path = "${wallpaper}";
       }];
 
       input-field = [{
