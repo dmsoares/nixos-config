@@ -55,7 +55,7 @@
       "SUPER_SHIFT, U, exec, ${editor}"
       "SUPER, N, exec, ${fileManager}"
 
-      "CTRL_ALT, L, exec, pgrep hyprlock || hyprlock"
+      "SUPER, ESCAPE, exec, pgrep hyprlock || hyprlock"
 
       # Screenshot
       ", Print, exec, grimblast --notify copysave area"

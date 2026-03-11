@@ -1,13 +1,17 @@
 { config, ... }:
-let
-  inherit (config.theme.colorscheme) colors;
-in
-{
+let inherit (config.theme.colorscheme) colors;
+in {
   programs.alacritty = {
     enable = true;
     settings = {
       env.TERM = "xterm-256color";
       font = { size = 10; };
+      window = {
+        padding = {
+          x = 5;
+          y = 5;
+        };
+      };
       colors = {
         primary = {
           background = "0x${colors.black0}";

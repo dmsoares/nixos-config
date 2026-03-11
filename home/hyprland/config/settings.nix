@@ -37,7 +37,7 @@
       gaps_in = 0;
       gaps_out = 0;
 
-      border_size = 2;
+      border_size = 3;
       "col.active_border" = "rgb(${colors.blue})";
       "col.inactive_border" = "rgb(${colors.gray0})";
 
