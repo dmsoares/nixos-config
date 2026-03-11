@@ -1,7 +1,7 @@
 { config, ... }:
 let rootPath = "${config.home.homeDirectory}/nixos-config/home";
 in {
-  imports = [ ./alacritty ./fzf ./git ./neovim ./rofi ./zsh ];
+  imports = [ ./alacritty ./fzf ./git ./neovim ./rofi ./tmux ./zsh ];
 
   xdg.configFile."doom".source =
     config.lib.file.mkOutOfStoreSymlink "${rootPath}/programs/doom";
