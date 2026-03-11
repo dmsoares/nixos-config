@@ -6,5 +6,7 @@
       enable = true;
       components = [ "pkcs11" "secrets" "ssh" ];
     };
+
+    tailscale-systray.enable = true;
   };
 }

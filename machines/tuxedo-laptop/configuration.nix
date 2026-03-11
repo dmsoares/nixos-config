@@ -29,6 +29,13 @@
     HandleLidSwitchDocked = "ignore";
   };
 
+  services.atd.enable = true;
+
+  services.openssh.enable = true;
+
+  services.tailscale.enable = true;
+  environment.systemPackages = [ pkgs.tailscale ];
+
   # Firmware (includes AMD ACP/DMIC firmware needed for internal microphone)
   hardware.enableRedistributableFirmware = true;
 
