@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-
+let
+  loginWallpaper = ./home/wallpapers/nix-wallpaper.png;
+in
 {
   # Hosts file
   environment.etc.hosts.mode = "0644";
@@ -172,6 +174,17 @@
     # haskell
     zlib
   ];
+
+  # GDM login wallpaper
+  programs.dconf.profiles.gdm.databases = [{
+    settings = {
+      "org/gnome/desktop/background" = {
+        picture-uri = "file://${loginWallpaper}";
+        picture-uri-dark = "file://${loginWallpaper}";
+        picture-options = "zoom";
+      };
+    };
+  }];
 
   # hyprland
   programs.hyprland.enable = true;
