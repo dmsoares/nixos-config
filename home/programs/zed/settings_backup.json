@@ -1,11 +1,3 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "show_edit_predictions": true,
   "agent": {
@@ -43,7 +35,6 @@
     "toggle_relative_line_numbers": true
   },
   "inlay_hints": {
-    // Global switch to toggle hints on and off, switched off by default.
     "enabled": false
   },
   "lsp": {
