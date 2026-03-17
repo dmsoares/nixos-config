@@ -4,12 +4,22 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    danksearch = {
+      url = "github:AvengeMedia/danksearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -40,15 +50,19 @@
           };
         }
       ];
+      dms-overlay = final: prev: {
+        dgop = (import nixpkgs-unstable {
+          system = system;
+          config.allowUnfree = true;
+        }).dgop;
+      };
     in {
       nixosConfigurations = {
         hp-desktop = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
             ./machines/hp-desktop/configuration.nix
-
-            # uncomment to apply overlays
-            # (args: { nixpkgs.overlays = import ./overlays args; })
+            { nixpkgs.overlays = [ dms-overlay ]; }
           ] ++ home;
         };
 
@@ -57,9 +71,7 @@
           modules = [
             ./machines/tuxedo-laptop/configuration.nix
             tuxedo-nixos.nixosModules.default
-
-            # uncomment to apply overlays
-            # (args: { nixpkgs.overlays = import ./overlays args; })
+            { nixpkgs.overlays = [ dms-overlay ]; }
           ] ++ home;
         };
       };
