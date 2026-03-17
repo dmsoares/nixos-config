@@ -9,6 +9,7 @@
             "left" = [ "dashboard" "workspaces" "windowtitle" ];
             "middle" = [ "media" "netstat" ];
             "right" = [
+              "hypridle"
               "volume"
               "network"
               "bluetooth"
