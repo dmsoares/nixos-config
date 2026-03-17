@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 let
   username = "decio";
@@ -22,7 +22,13 @@ let
   };
 
 in {
-  imports = [ ./hyprland ./services ./programs ];
+  imports = [
+    inputs.dms.homeModules.dank-material-shell
+    inputs.danksearch.homeModules.default
+    ./hyprland
+    ./services
+    ./programs
+  ];
 
   # Theme selection — change to "gruvbox-dark" to switch all themed components
   # theme.name = "gruvbox-dark";
@@ -43,7 +49,7 @@ in {
       kazam
       insomnia
       mate.atril
-      telegram-desktop
+      pkgs-unstable.telegram-desktop
       spotify
       emacs
       pkgs-unstable.obsidian
