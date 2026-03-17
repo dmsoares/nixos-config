@@ -10,8 +10,6 @@
     ];
 
     env = [
-      "GDK_SCALE,2"
-      "XCURSOR_SIZE,32"
       "CLUTTER_BACKEND,wayland"
       "GDK_BACKEND,wayland,x11,*"
       "SDL_VIDEODRIVER,wayland"
@@ -23,15 +21,14 @@
       "QT_QPA_PLATFORMTHEME,qt5ct"
       "QT_STYLE_OVERRIDE,kvantum"
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      "ELECTRON_OZONE_PLATFORM_HINT,auto"
       "GTK_THEME,${config.gtk.theme.name}"
       "XCURSOR_THEME,${pointer.name}"
       "XCURSOR_SIZE,${toString pointer.size}"
     ];
 
-    exec-once = [
-      "hyprpanel"
-      "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-    ];
+    exec-once =
+      [ "hyprctl setcursor ${pointer.name} ${toString pointer.size}" ];
 
     general = {
       gaps_in = 0;
