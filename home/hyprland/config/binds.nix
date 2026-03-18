@@ -55,12 +55,12 @@
       "SUPER_SHIFT, U, exec, ${editor}"
       "SUPER, N, exec, ${fileManager}"
 
-      "SUPER, ESCAPE, exec, pgrep hyprlock || hyprlock"
+      "SUPER, ESCAPE, exec, dms ipc lock lock"
 
       # Screenshot
-      ", Print, exec, grimblast --notify copysave area"
-      "CTRL, Print, exec, grimblast --notify --cursor copysave output"
-      "ALT, Print, exec, grimblast --notify --cursor copysave screen"
+      ", Print, exec, dms screenshot region"
+      "CTRL, Print, exec, dms screenshot full --cursor on"
+      "ALT, Print, exec, dms screenshot all --cursor on"
     ] ++ builtins.concatLists (builtins.genList (x:
       let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
       in [
@@ -93,9 +93,7 @@
 
     bindr = [
       # Launcher
-      ''
-        SUPER, P, exec, rofi -show combi -modes combi -combi-modes "window,drun" -show-icons
-      ''
+      "SUPER, P, exec, dms ipc spotlight open"
       "SUPER_SHIFT, P, exec, rofi -modi emoji -show emoji -emoji-mode copy"
     ];
 
@@ -114,8 +112,8 @@
       ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 
       # Brightness control
-      ",XF86MonBrightnessUp, exec, brightnessctl set 5%+ # Modified from -e4 -n2"
-      ",XF86MonBrightnessDown, exec, brightnessctl set 5%- # Modified from -e4 -n2"
+      ",XF86MonBrightnessUp, exec, dms ipc brightness increment 5 backlight:amdgpu_bl1"
+      ",XF86MonBrightnessDown, exec, dms ipc brightness decrement 5 backlight:amdgpu_bl1"
     ];
 
     # Mouse bindings

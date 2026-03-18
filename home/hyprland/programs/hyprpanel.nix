@@ -125,6 +125,5 @@
     btop
     matugen
     swww
-    grimblast
   ];
 }

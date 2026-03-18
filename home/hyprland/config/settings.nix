@@ -122,19 +122,9 @@
       "3, horizontal, workspace"
       "4, swipe, move"
       "4, swipe, mod: SUPER, resize"
+      "3, up, dispatcher, exec, dms ipc hypr openOverview"
+      "3, down, dispatcher, exec, dms ipc hypr closeOverview"
     ];
 
-    hyprexpo-gesture = [ "3, up, expo" ];
-
-    plugin = {
-      hyprexpo = {
-        columns = 3;
-        gap_size = 5;
-        bg_col = "rgb(${colors.black0})";
-        workspace_method =
-          "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-        gesture_distance = 250; # how far is the "max" for the gesture
-      };
-    };
   };
 }
