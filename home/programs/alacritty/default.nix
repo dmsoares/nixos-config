@@ -5,7 +5,10 @@ in {
     enable = true;
     settings = {
       env.TERM = "xterm-256color";
-      font = { size = 10; };
+      font = {
+        normal = { family = "FiraCode Nerd Font"; };
+        size = 12.0;
+      };
       window = {
         padding = {
           x = 5;
@@ -14,7 +17,7 @@ in {
       };
       colors = {
         primary = {
-          background = "0x${colors.black0}";
+          background = "0x${colors.black2}";
           foreground = "0x${colors.white}";
         };
         normal = {
