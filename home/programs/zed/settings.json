@@ -10,8 +10,10 @@
   "show_edit_predictions": true,
   "agent": {
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash",
+      "effort": "medium",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
     },
     "default_profile": "write",
   },
