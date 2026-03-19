@@ -42,6 +42,26 @@
         "type": "github"
       }
     },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773883193,
+        "narHash": "sha256-sINvV6FgmH9Tdq2LrAhhcz+LdN7/+qVLjTiqCBckR2k=",
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "rev": "4ecdec902e07f7f2e77e462af19aff4570036734",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -205,6 +225,7 @@
       "inputs": {
         "danksearch": "danksearch",
         "dms": "dms",
+        "dms-plugin-registry": "dms-plugin-registry",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
         "nix-vscode-extensions": "nix-vscode-extensions",

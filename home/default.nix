@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, ... }:
+args@{ config, pkgs, pkgs-unstable, ... }:
 
 let
   username = "decio";
@@ -21,14 +21,10 @@ let
     size = 24;
   };
 
+  hyprland = import ./hyprland args;
+
 in {
-  imports = [
-    inputs.dms.homeModules.dank-material-shell
-    inputs.danksearch.homeModules.default
-    ./hyprland
-    ./services
-    ./programs
-  ];
+  imports = [ hyprland ./services ./programs ];
 
   # Theme selection — change to "gruvbox-dark" to switch all themed components
   # theme.name = "gruvbox-dark";
@@ -99,6 +95,7 @@ in {
       haskellPackages.hoogle
       inotify-tools
       libnotify
+      libqalculate
       neofetch
       pandoc
       pavucontrol

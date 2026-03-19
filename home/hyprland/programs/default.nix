@@ -1,6 +1,7 @@
-{
-  # imports = [ ./hyprpanel.nix ];
+args@{ ... }:
+let dms = import ./dank-material-shell.nix args;
+in {
+  imports = [ dms ];
+
   programs.kitty.enable = true;
-  programs.dank-material-shell.enable = true;
-  programs.dsearch.enable = true;
 }
