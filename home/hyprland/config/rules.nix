@@ -16,6 +16,7 @@
       "float, class:^(org.gnome.Loupe)$"
       "float, class:^(thunar)$"
       "float, class:^(xdg-desktop-portal-gtk)$"
+      "workspace Music, class:^(spotify)$"
 
       "float, title:^(File Upload)(.*)$"
       "float, title:^(Library)(.*)$"
@@ -24,8 +25,8 @@
       "float, title:^(Save As)(.*)$"
       "float, title:^(Select a File)(.*)$"
 
-      "float, title:^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$"
-      "pin, title:^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$"
+      "float, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
+      "pin, title:^([Pp]icture[-s]?[Ii]n[-s]?[Pp]icture)(.*)$"
 
       "idleinhibit fullscreen, class:^(.*)$"
       "idleinhibit fullscreen, title:^(.*)$"
@@ -42,6 +43,7 @@
     workspace = [
       "w[tv1], gapsout:0, gapsin:0"
       "f[1], gapsout:0, gapsin:0"
+      "name:Music, persistent:true"
     ];
   };
 }

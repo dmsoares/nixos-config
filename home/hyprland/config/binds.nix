@@ -7,7 +7,7 @@
     in [
       # Compositor commands
       "SUPER_SHIFT, P, pseudo"
-      "SUPER, S, togglesplit"
+      # "SUPER, S, togglesplit"
       "SUPER, F, togglefloating"
       "SUPER, Q, killactive"
       "SUPER, Space, fullscreen"
@@ -54,6 +54,7 @@
       "SUPER, U, exec, emacsclient -c -a ''"
       "SUPER_SHIFT, U, exec, ${editor}"
       "SUPER, N, exec, ${fileManager}"
+      "SUPER, S, exec, bash -c 'if hyprctl activeworkspace | grep -q Music; then hyprctl dispatch focusworkspaceoncurrentmonitor previous; else (pgrep -x .spotify-wrapped || (spotify &)); hyprctl dispatch focusworkspaceoncurrentmonitor name:Music; fi'"
 
       "SUPER, ESCAPE, exec, dms ipc lock lock"
 
