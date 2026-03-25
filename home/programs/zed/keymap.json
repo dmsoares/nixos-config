@@ -26,7 +26,7 @@
       "shift-space w L": "workspace::SwapPaneRight",
       "shift-space w K": "workspace::SwapPaneUp",
       "shift-space w d": "pane::CloseAllItems",
-      "shift-space b D": "pane::CloseInactiveItems",
+      "shift-space b D": "pane::CloseOtherItems",
       "shift-space b d": "pane::CloseActiveItem",
       "shift-space f f": "project_panel::ToggleFocus",
       "shift-space t t": "workspace::ToggleLeftDock",
@@ -38,8 +38,8 @@
       "shift-space /": "workspace::NewSearch",
       "shift-space S": "project_symbols::Toggle",
       "shift-space s": "outline::Toggle",
-      "shift-space tab": "tab_switcher::Toggle"
-    }
+      "shift-space tab": "tab_switcher::Toggle",
+    },
   },
   {
     "context": "Editor && vim_mode == normal && (vim_operator == none || vim_operator == n) && !VimWaiting",
@@ -63,7 +63,7 @@
       "space w L": "workspace::SwapPaneRight",
       "space w K": "workspace::SwapPaneUp",
       "space w d": "pane::CloseAllItems",
-      "space b D": "pane::CloseInactiveItems",
+      "space b D": "pane::CloseOtherItems",
       "space b d": "pane::CloseActiveItem",
       "space b l": ["workspace::SendKeystrokes", "space tab enter"],
       "space b b": "tab_switcher::Toggle",
@@ -79,8 +79,20 @@
       "space S": "project_symbols::Toggle",
       "space s": "outline::Toggle",
       "space g b": "editor::ToggleGitBlameInline",
-      "space g B": "git::Blame"
-    }
+      "space g B": "git::Blame",
+    },
+  },
+  {
+    // Null out both leaders when focused inside the agent prompt editor.
+    // Nulling the root key (`space` / `shift-space`) automatically disables
+    // every multi-key sequence that starts with it, so no per-binding list
+    // is needed. MessageEditor > Editor is more specific (lower in the
+    // context tree) than both Workspace and Editor, so it wins cleanly.
+    "context": "MessageEditor > Editor",
+    "bindings": {
+      "space": null,
+      "shift-space": null,
+    },
   },
   {
     "context": "Editor && (showing_code_actions || showing_completions)",
@@ -90,8 +102,8 @@
       "down": "editor::ContextMenuNext",
       "ctrl-j": "editor::ContextMenuNext",
       "ctrl-h": "editor::ContextMenuFirst",
-      "ctrl-l": "editor::ContextMenuLast"
-    }
+      "ctrl-l": "editor::ContextMenuLast",
+    },
   },
   {
     "context": "Picker || menu",
@@ -99,15 +111,15 @@
       "ctrl-k": "menu::SelectPrevious",
       "ctrl-j": "menu::SelectNext",
       "ctrl-h": "menu::SelectFirst",
-      "ctrl-l": "menu::SelectLast"
-    }
+      "ctrl-l": "menu::SelectLast",
+    },
   },
   {
     "context": "Prompt",
     "bindings": {
       "ctrl-h": "menu::SelectPrevious",
-      "ctrl-l": "menu::SelectNext"
-    }
+      "ctrl-l": "menu::SelectNext",
+    },
   },
   {
     "context": "ProjectPanel && !editing",
@@ -117,11 +129,11 @@
       "x": "project_panel::Delete",
       "r": "project_panel::Rename",
       "escape": "workspace::ToggleLeftDock",
-      "enter": ["workspace::SendKeystrokes", "enter escape"]
-    }
+      "enter": ["workspace::SendKeystrokes", "enter escape"],
+    },
   },
   {
-    "context": "Dock && !editing",
+    "context": "Dock && !editing && !AgentPanel",
     "bindings": {
       "space w h": "workspace::ActivatePaneLeft",
       "space w j": "workspace::ActivatePaneDown",
@@ -130,47 +142,7 @@
       "space w d": "workspace::ToggleLeftDock",
       "space t t": "workspace::ToggleLeftDock",
       "space p p": "projects::OpenRecent",
-      "ctrl-p": "file_finder::Toggle"
-    }
+      "ctrl-p": "file_finder::Toggle",
+    },
   },
-  {
-    "context": "AssistantPanel",
-    "bindings": {
-      "alt-j": null,
-      "alt-k": null,
-      "space w v": null,
-      "space w s": null,
-      "space E": null,
-      "space e k": null,
-      "space e j": null,
-      "space e e": null,
-      "space e f": null,
-      "space e w": null,
-      "space w h": null,
-      "space w j": null,
-      "space w k": null,
-      "space w l": null,
-      "space w H": null,
-      "space w J": null,
-      "space w L": null,
-      "space w K": null,
-      "space w d": null,
-      "space b D": null,
-      "space b d": null,
-      "space b l": null,
-      "space b b": null,
-      "space tab": null,
-      "space f f": null,
-      "space t t": null,
-      "space T c": null,
-      "space p p": null,
-      "space b o": null,
-      "space b i": null,
-      "space /": null,
-      "space S": null,
-      "space s": null,
-      "space g b": null,
-      "space g B": null
-    }
-  }
 ]
