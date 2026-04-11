@@ -36,7 +36,7 @@ in {
       # apps
       anki
       antigravity
-      pkgs-unstable.claude-code
+      claude-code
       discord
       gimp
       godot
@@ -179,6 +179,7 @@ in {
         "file://${config.home.homeDirectory}/Music"
         "file://${config.home.homeDirectory}/Pictures"
         "file://${config.home.homeDirectory}/Videos"
+        "file://${config.home.homeDirectory}/Sync"
       ];
       extraConfig.gtk-application-prefer-dark-theme = true;
     };
