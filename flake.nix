@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,8 +29,8 @@
     };
   };
 
-  outputs =
-    { nixpkgs, nixpkgs-unstable, home-manager, tuxedo-nixos, ... }@inputs:
+  outputs = { nixpkgs, nixos-unstable, nixpkgs-unstable, home-manager
+    , tuxedo-nixos, ... }@inputs:
     let
       system = "x86_64-linux";
       home = [
@@ -43,7 +44,7 @@
             users.decio = import ./home;
 
             extraSpecialArgs = {
-              pkgs-unstable = import nixpkgs-unstable {
+              pkgs-unstable = import nixos-unstable {
                 system = system;
                 config.allowUnfree = true;
                 config.permittedInsecurePackages = [ "electron-25.9.0" ];
@@ -60,13 +61,19 @@
           config.allowUnfree = true;
         }).dgop;
       };
+      claude-code = final: prev: {
+        claude-code = (import nixpkgs-unstable {
+          system = system;
+          config.allowUnfree = true;
+        }).claude-code;
+      };
     in {
       nixosConfigurations = {
         hp-desktop = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
             ./machines/hp-desktop/configuration.nix
-            { nixpkgs.overlays = [ dms-overlay ]; }
+            { nixpkgs.overlays = [ dms-overlay claude-code ]; }
           ] ++ home;
         };
 
@@ -75,7 +82,7 @@
           modules = [
             ./machines/tuxedo-laptop/configuration.nix
             tuxedo-nixos.nixosModules.default
-            { nixpkgs.overlays = [ dms-overlay ]; }
+            { nixpkgs.overlays = [ dms-overlay claude-code ]; }
           ] ++ home;
         };
       };
