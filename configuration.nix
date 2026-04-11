@@ -3,10 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-let
-  loginWallpaper = ./home/wallpapers/nix-wallpaper.png;
-in
-{
+let loginWallpaper = ./home/wallpapers/nix-wallpaper.png;
+in {
   # Hosts file
   environment.etc.hosts.mode = "0644";
   # networking.extraHosts =
@@ -200,11 +198,11 @@ in
     gnome.gnome-keyring.enable = true;
     autorandr.enable = true;
 
-    upower = {
-      enable = true;
-      criticalPowerAction = "Hibernate";
-      percentageCritical = 5;
-    };
+    # upower = {
+    #   enable = true;
+    #   criticalPowerAction = "Hibernate";
+    #   percentageCritical = 5;
+    # };
 
     # Thunar
     gvfs.enable = true; # Mount, trash, and other functionalities
