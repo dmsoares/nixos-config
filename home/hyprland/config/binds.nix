@@ -57,6 +57,7 @@
       "SUPER, S, exec, bash -c 'if hyprctl activeworkspace | grep -q Music; then hyprctl dispatch focusworkspaceoncurrentmonitor previous; else (pgrep -x .spotify-wrapped || (spotify &)); hyprctl dispatch focusworkspaceoncurrentmonitor name:Music; fi'"
 
       "SUPER, ESCAPE, exec, dms ipc lock lock"
+      "SUPER_SHIFT, ESCAPE, exec, dms ipc powermenu open"
 
       # Screenshot
       ", Print, exec, dms screenshot region"

@@ -120,10 +120,10 @@
 
     gesture = [
       "3, horizontal, workspace"
-      "4, swipe, move"
-      "4, swipe, mod: SUPER, resize"
       "3, up, dispatcher, exec, dms ipc hypr openOverview"
       "3, down, dispatcher, exec, dms ipc hypr closeOverview"
+      "4, swipe, move"
+      "4, swipe, mod: SUPER, resize"
     ];
 
   };
